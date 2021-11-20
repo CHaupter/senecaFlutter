@@ -202,11 +202,6 @@ class ComprobarCredenciales extends StatelessWidget {
       List<Credenciales> listaCredenciales, String usuario, String pass) {
     bool credencialesCorrectas = false;
     for (int i = 0; i < listaCredenciales.length; i++) {
-      print("$i" + listaCredenciales[i].usuario);
-      print("$i" + listaCredenciales[i].pass);
-      print("Usuario: " + usuario);
-      print("Pass:" + pass);
-
       if (listaCredenciales[i].usuario == usuario.toString() &&
           listaCredenciales[i].pass == pass.toString()) {
         credencialesCorrectas = true;
