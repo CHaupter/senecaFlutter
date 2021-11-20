@@ -187,7 +187,7 @@ class ComprobarCredenciales extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(Colors.white),
         ),
         onPressed: () {
-          if (comprobarCredenciales(listaCredenciales, usuario, pass))
+          if (_comprobarCredenciales(listaCredenciales, usuario, pass))
             Navigator.pushNamed(context, "home_screen");
         },
         child: Text(
@@ -198,7 +198,7 @@ class ComprobarCredenciales extends StatelessWidget {
     );
   }
 
-  bool comprobarCredenciales(
+  bool _comprobarCredenciales(
       List<Credenciales> listaCredenciales, String usuario, String pass) {
     bool credencialesCorrectas = false;
     for (int i = 0; i < listaCredenciales.length; i++) {
