@@ -1,8 +1,25 @@
 // To parse this JSON data, do
 //
-//     final credencialesResponse = credencialesResponseFromMap(jsonString);
+//     final welcome = welcomeFromMap(jsonString);
 
 import 'dart:convert';
+
+class CredencialesResponse {
+  CredencialesResponse({
+    required this.results,
+  });
+
+  List<Credenciales> results;
+
+  factory CredencialesResponse.fromJson(String str) =>
+      CredencialesResponse.fromMap(json.decode(str));
+
+  factory CredencialesResponse.fromMap(Map<String, dynamic> json) =>
+      CredencialesResponse(
+        results: List<Credenciales>.from(
+            json["results"].map((x) => Credenciales.fromMap(x))),
+      );
+}
 
 class Credenciales {
   Credenciales({
@@ -11,23 +28,11 @@ class Credenciales {
     required this.pass,
   });
 
-  String? id;
-  String? usuario;
-  String? pass;
+  String id;
+  String usuario;
+  String pass;
 
-  getIdUsuario() {
-    return this.id;
-  }
-
-  getNombreUsuario() {
-    return this.usuario;
-  }
-
-  getPassUsuario() {
-    return this.pass;
-  }
-
-  factory Credenciales.fromJson(String str) =>
+  factory Credenciales.fromJson(dynamic str) =>
       Credenciales.fromMap(json.decode(str));
 
   factory Credenciales.fromMap(Map<String, dynamic> json) => Credenciales(

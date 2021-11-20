@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:seneca_aplicacion/models/credenciales.dart';
+import 'package:seneca_aplicacion/providers/credenciales_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -7,13 +10,17 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool mostrarTexto = true;
+  TextEditingController _usuarioController = TextEditingController();
+  TextEditingController _passController = TextEditingController();
+  String usuarioTexto = "";
+  String passTexto = "";
+
   @override
   Widget build(BuildContext context) {
-    String usuarioTexto = "";
-    String passTexto = "";
-    bool mostrarTexto = false;
+    final credencialesProvider = Provider.of<CredencialesProvider>(context);
 
-    final _inputDecorationUsuario = InputDecoration(
+    InputDecoration _inputDecorationUsuario = InputDecoration(
       enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white, width: 3)),
       border: OutlineInputBorder(
@@ -23,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       filled: true,
     );
 
-    final _inputDecorationPass = InputDecoration(
+    InputDecoration _inputDecorationPass = InputDecoration(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white, width: 3)),
         border: OutlineInputBorder(
@@ -87,34 +94,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(color: Colors.white),
                           obscureText: mostrarTexto,
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: 15),
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, "home_screen");
-                            },
-                            child: Text(
-                              "Entrar",
-                              style: TextStyle(
-                                  color: Colors.blueAccent, fontSize: 20),
-                            ),
-                          ),
-                        ),
+                        ComprobarCredenciales(
+                            listaCredenciales:
+                                credencialesProvider.listaCredenciales,
+                            usuario: usuarioTexto,
+                            pass: passTexto),
                         Container(
                           margin: EdgeInsets.only(top: 15),
                           child: TextButton(
-                              child: Text("No recuerdo mi contraseña",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontStyle: FontStyle.italic,
-                                  )),
-                              onPressed: null),
+                            child: Text("No recuerdo mi contraseña",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontStyle: FontStyle.italic,
+                                )),
+                            onPressed: null,
+                          ),
                         ),
                         Align(
                           alignment: FractionalOffset.bottomCenter,
@@ -168,5 +162,57 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ]),
         ));
+  }
+}
+
+class ComprobarCredenciales extends StatelessWidget {
+  final List<Credenciales> listaCredenciales;
+  final String usuario;
+  final String pass;
+  const ComprobarCredenciales(
+      {Key? key,
+      required this.listaCredenciales,
+      required this.usuario,
+      required this.pass})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 15),
+      width: double.infinity,
+      height: 50,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.white),
+        ),
+        onPressed: () {
+          if (comprobarCredenciales(listaCredenciales, usuario, pass))
+            Navigator.pushNamed(context, "home_screen");
+        },
+        child: Text(
+          "Entrar",
+          style: TextStyle(color: Colors.blueAccent, fontSize: 20),
+        ),
+      ),
+    );
+  }
+
+  bool comprobarCredenciales(
+      List<Credenciales> listaCredenciales, String usuario, String pass) {
+    bool credencialesCorrectas = false;
+    for (int i = 0; i < listaCredenciales.length; i++) {
+      print("$i" + listaCredenciales[i].usuario);
+      print("$i" + listaCredenciales[i].pass);
+      print("Usuario: " + usuario);
+      print("Pass:" + pass);
+
+      if (listaCredenciales[i].usuario == usuario.toString() &&
+          listaCredenciales[i].pass == pass.toString()) {
+        credencialesCorrectas = true;
+      }
+    }
+
+    return credencialesCorrectas;
   }
 }

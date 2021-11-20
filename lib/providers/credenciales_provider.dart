@@ -26,12 +26,9 @@ class CredencialesProvider extends ChangeNotifier {
     String respuesta = await _getJsonData();
     respuesta = '{"results":' + respuesta + "}";
     //respuesta = respuesta.substring(1, respuesta.length - 1);
-    print(respuesta);
 
-    final credencialesResponse = Credenciales.fromJson(respuesta);
+    final credencialesResponse = CredencialesResponse.fromJson(respuesta);
 
-    print(credencialesResponse.usuario);
-
-    notifyListeners();
+    listaCredenciales = [...credencialesResponse.results];
   }
 }
