@@ -17,8 +17,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool mostrarTexto = true;
 
   //final fb = FirebaseDatabase.instance;
-  final _passController = TextEditingController();
-  final usuarioController = TextEditingController();
   String usuarioTexto = "";
   String passTexto = "";
 
@@ -26,6 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     //final ref = fb.reference();
     final credencialesProvider = Provider.of<CredencialesProvider>(context);
+
+    print("Tamaño lista: " +
+        credencialesProvider.listaCredenciales.length.toString());
 
     InputDecoration _inputDecorationUsuario = InputDecoration(
       enabledBorder: OutlineInputBorder(
@@ -81,7 +82,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontFamily: 'ErasDemi'),
                         ),
                         TextField(
-                          controller: usuarioController,
                           decoration: _inputDecorationUsuario,
                           onChanged: (value) => setState(() {
                             usuarioTexto = value;
@@ -92,7 +92,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 10,
                         ),
                         TextField(
-                          controller: _passController,
                           decoration: _inputDecorationPass,
                           onChanged: (value) => setState(() {
                             passTexto = value;
@@ -205,10 +204,6 @@ class ComprobarCredenciales extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
-    print(user!.email);
-    String? usuarioGoogle = user.email;
-
     return Container(
       margin: EdgeInsets.only(top: 15),
       width: double.infinity,
@@ -218,8 +213,13 @@ class ComprobarCredenciales extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(Colors.white),
         ),
         onPressed: () {
-          if (_comprobarCredenciales(listaCredenciales, usuarioGoogle, pass))
-            Navigator.pushNamed(context, "home_screen");
+          User? user = FirebaseAuth.instance.currentUser;
+          if (user != null) {
+            String? usuarioGoogle = user.email;
+
+            if (_comprobarCredenciales(listaCredenciales, usuarioGoogle, pass))
+              Navigator.pushNamed(context, "home_screen");
+          }
         },
         child: Text(
           "Entrar",
@@ -236,6 +236,7 @@ class ComprobarCredenciales extends StatelessWidget {
     print(usuario);
     print(listaCredenciales);
     for (int i = 0; i < listaCredenciales.length; i++) {
+      print(listaCredenciales[i]);
       if (listaCredenciales[i].usuario == usuario.toString()) {
         credencialesCorrectas = true;
       }
