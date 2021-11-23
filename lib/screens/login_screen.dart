@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/models/credenciales.dart';
 import 'package:seneca_aplicacion/providers/credenciales_provider.dart';
+import 'package:seneca_aplicacion/service/google_sign_in.dart';
+import 'package:seneca_aplicacion/service/google_sign_out.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,10 +14,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool mostrarTexto = true;
-  TextEditingController _usuarioController = TextEditingController();
-  TextEditingController _passController = TextEditingController();
+
+  final _passController = TextEditingController();
+  final _usuarioController = TextEditingController();
   String usuarioTexto = "";
   String passTexto = "";
+
+  GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +71,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 160,
-                        ),
                         Text(
                           "iSéneca",
                           style: TextStyle(
@@ -77,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontFamily: 'ErasDemi'),
                         ),
                         TextField(
+                          controller: _usuarioController,
                           decoration: _inputDecorationUsuario,
                           onChanged: (value) => setState(() {
                             usuarioTexto = value;
@@ -87,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 10,
                         ),
                         TextField(
+                          controller: _passController,
                           decoration: _inputDecorationPass,
                           onChanged: (value) => setState(() {
                             passTexto = value;
@@ -99,69 +104,90 @@ class _LoginScreenState extends State<LoginScreen> {
                                 credencialesProvider.listaCredenciales,
                             usuario: usuarioTexto,
                             pass: passTexto),
-                        Container(
-                          margin: EdgeInsets.only(top: 15),
-                          child: TextButton(
-                            child: Text("No recuerdo mi contraseña",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontStyle: FontStyle.italic,
-                                )),
-                            onPressed: null,
-                          ),
+                        GoogleSignIn(),
+                        GoogleSignOut(),
+                        RecuperarPass(),
+                        SizedBox(
+                          height: 50,
                         ),
-                        Align(
-                          alignment: FractionalOffset.bottomCenter,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 170,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    child: Image(
-                                      color: Colors.white,
-                                      image:
-                                          AssetImage("assets/iconoJunta.png"),
-                                    ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Junta de Andalucía",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 17)),
-                                      Text(
-                                        "Consejería de Educación y Deporte",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 17),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              Container(
-                                  alignment: Alignment.bottomRight,
-                                  child: Text("v11.3.0",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)))
-                            ],
-                          ),
-                        )
+                        TituloInferior()
                       ]),
                 ),
               ),
             ),
           ]),
         ));
+  }
+}
+
+class TituloInferior extends StatelessWidget {
+  const TituloInferior({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: FractionalOffset.bottomCenter,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 60,
+                height: 60,
+                child: Image(
+                  color: Colors.white,
+                  image: AssetImage("assets/iconoJunta.png"),
+                ),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Junta de Andalucía",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17)),
+                  Text(
+                    "Consejería de Educación y Deporte",
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  )
+                ],
+              )
+            ],
+          ),
+          Container(
+              alignment: Alignment.bottomRight,
+              child: Text("v11.3.0",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)))
+        ],
+      ),
+    );
+  }
+}
+
+class RecuperarPass extends StatelessWidget {
+  const RecuperarPass({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 15),
+      child: TextButton(
+        child: Text("No recuerdo mi contraseña",
+            style: TextStyle(
+              color: Colors.white,
+              fontStyle: FontStyle.italic,
+            )),
+        onPressed: null,
+      ),
+    );
   }
 }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "967095057475",
+    "project_id": "senecaflutter",
+    "storage_bucket": "senecaflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967095057475:android:eed9f131f8c8c7296d28f6",
+        "android_client_info": {
+          "package_name": "com.example.seneca_aplicacion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967095057475-uga5s4rcp1uuv0tjqnt971irhsj4sh4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtM5bFC99wPRMmRpSSBrA2z68RLsyQ__o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967095057475-uga5s4rcp1uuv0tjqnt971irhsj4sh4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

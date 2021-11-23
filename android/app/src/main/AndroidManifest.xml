@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.seneca_aplicacion">
-   <application
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+   <application android:usesCleartextTraffic="true"
         android:label="seneca_aplicacion"
         android:icon="@mipmap/ic_launcher">
         <activity

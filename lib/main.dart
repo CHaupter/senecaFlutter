@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/providers/credenciales_provider.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
+import "package:firebase_core/firebase_core.dart";
 
 import 'package:provider/provider.dart';
 
-void main() => runApp(AppState());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  print("Esperando Firebase");
+  await Firebase.initializeApp();
+  runApp(AppState());
+}
 
 class AppState extends StatelessWidget {
   @override
