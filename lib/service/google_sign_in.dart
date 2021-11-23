@@ -13,7 +13,6 @@ class GoogleSignIn extends StatefulWidget {
 
 class _GoogleSignInState extends State<GoogleSignIn> {
   bool isLoading = false;
-  bool isSignedIn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,6 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                 FirebaseService service = new FirebaseService();
                 try {
                   await service.signInWithGoogle();
-                  isSignedIn = true;
                 } catch (e) {
                   if (e is FirebaseAuthException) {
                     print(e.message!);
@@ -59,6 +57,4 @@ class _GoogleSignInState extends State<GoogleSignIn> {
           )
         : CircularProgressIndicator();
   }
-
-  
 }

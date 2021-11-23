@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  print("Esperando Firebase");
   await Firebase.initializeApp();
   runApp(AppState());
 }
