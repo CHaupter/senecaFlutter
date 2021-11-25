@@ -55,6 +55,7 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                   side: MaterialStateProperty.all<BorderSide>(BorderSide.none)),
             ),
           )
-        : CircularProgressIndicator();
+        : Container(
+            margin: EdgeInsets.all(15), child: CircularProgressIndicator());
   }
 }

@@ -29,6 +29,7 @@ class CredencialesProvider extends ChangeNotifier {
 
     final credencialesResponse = CredencialesResponse.fromJson(respuesta);
 
-    listaCredenciales = [...credencialesResponse.results];
+    listaCredenciales = credencialesResponse.results;
+    notifyListeners();
   }
 }

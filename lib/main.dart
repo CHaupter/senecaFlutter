@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seneca_aplicacion/providers/centro_provider.dart';
 import 'package:seneca_aplicacion/providers/credenciales_provider.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
 import "package:firebase_core/firebase_core.dart";
@@ -19,6 +20,10 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => CredencialesProvider(),
           lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CentroProvider(),
+          lazy: false,
         )
       ],
       child: MyApp(),
@@ -37,7 +42,11 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (BuildContext context) => LoginScreen(),
-        "home_screen": (BuildContext context) => HomeScreen()
+        "home_screen": (BuildContext context) => HomeScreen(),
+        "convivencia_screen": (BuildContext context) => ConvivenciaScreen(),
+        "parte_screen": (BuildContext context) => ParteScreen(),
+        "personal_screen": (BuildContext context) => PersonalScreen(),
+        "listado_screen": (BuildContext context) => ListadoProfesores(),
       },
     );
   }

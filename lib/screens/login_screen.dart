@@ -24,8 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final ref = fb.reference();
     final credencialesProvider = Provider.of<CredencialesProvider>(context);
+    final lista = credencialesProvider.listaCredenciales;
+    //lista = credencialesProvider.listaCredenciales;
+
+    print(lista.length);
 
     InputDecoration _inputDecorationUsuario = InputDecoration(
       enabledBorder: OutlineInputBorder(
@@ -101,8 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: mostrarTexto,
                         ),
                         ComprobarCredenciales(
-                            listaCredenciales:
-                                credencialesProvider.listaCredenciales,
+                            listaCredenciales: lista,
                             usuario: usuarioTexto,
                             pass: passTexto),
                         GoogleSignIn(),
@@ -205,10 +207,6 @@ class ComprobarCredenciales extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
-    print(user!.email);
-    String? usuarioGoogle = user.email;
-
     return Container(
       margin: EdgeInsets.only(top: 15),
       width: double.infinity,
@@ -218,6 +216,8 @@ class ComprobarCredenciales extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(Colors.white),
         ),
         onPressed: () {
+          User? user = FirebaseAuth.instance.currentUser;
+          String? usuarioGoogle = user!.email;
           if (_comprobarCredenciales(listaCredenciales, usuarioGoogle, pass))
             Navigator.pushNamed(context, "home_screen");
         },

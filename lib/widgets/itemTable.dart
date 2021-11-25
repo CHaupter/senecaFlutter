@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seneca_aplicacion/screens/convivencia_screen.dart';
 import 'package:seneca_aplicacion/widgets/widgets.dart';
 
 class ItemTable extends StatelessWidget {
@@ -15,9 +16,16 @@ class ItemTable extends StatelessWidget {
             horizontalInside: BorderSide(color: Colors.grey, width: 0.5)),
         children: [
           TableRow(children: [
-            SingleCard(icon: Icons.people, text: "Alumnado del centro"),
-            SingleCard(
-                icon: Icons.emoji_people_outlined, text: "Personal del centro"),
+            GestureDetector(
+                onTap: () => Navigator.pushNamed(context, "convivencia_screen"),
+                child: SingleCard(
+                    icon: Icons.people, text: "Alumnado del centro")),
+            GestureDetector(
+              onTap: () => Navigator.pushNamed(context, "personal_screen"),
+              child: SingleCard(
+                  icon: Icons.emoji_people_outlined,
+                  text: "Personal del centro"),
+            ),
             SingleCard(icon: Icons.sick, text: "Información Covid"),
           ]),
           TableRow(children: [
