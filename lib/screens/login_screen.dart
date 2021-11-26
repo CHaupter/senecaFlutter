@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       end: Alignment.bottomCenter,
                       colors: [Color(0xFF005499), Color(0xFF01315a)])),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.only(left: 30, right: 30, top: 120),
                 child: Center(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,34 +84,32 @@ class _LoginScreenState extends State<LoginScreen> {
                               fontWeight: FontWeight.bold,
                               fontFamily: 'ErasDemi'),
                         ),
-                        TextField(
-                          decoration: _inputDecorationUsuario,
-                          onChanged: (value) => setState(() {
-                            usuarioTexto = value;
-                          }),
-                          style: TextStyle(color: Colors.white),
+                        Container(
+                          child: TextField(
+                            decoration: _inputDecorationUsuario,
+                            onChanged: (value) => setState(() {
+                              usuarioTexto = value;
+                            }),
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          decoration: _inputDecorationPass,
-                          onChanged: (value) => setState(() {
-                            passTexto = value;
-                          }),
-                          style: TextStyle(color: Colors.white),
-                          obscureText: mostrarTexto,
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: TextField(
+                            decoration: _inputDecorationPass,
+                            onChanged: (value) => setState(() {
+                              passTexto = value;
+                            }),
+                            style: TextStyle(color: Colors.white),
+                            obscureText: mostrarTexto,
+                          ),
                         ),
                         ComprobarCredenciales(
                             listaCredenciales: lista,
                             usuario: usuarioTexto,
                             pass: passTexto),
                         GoogleSignIn(),
-                        GoogleSignOut(),
                         RecuperarPass(),
-                        SizedBox(
-                          height: 50,
-                        ),
                         TituloInferior()
                       ]),
                 ),
@@ -129,8 +127,8 @@ class TituloInferior extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: FractionalOffset.bottomCenter,
+    return Container(
+      margin: EdgeInsets.only(top: 180),
       child: Column(
         children: [
           Row(
@@ -215,9 +213,7 @@ class ComprobarCredenciales extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(Colors.white),
         ),
         onPressed: () {
-          User? user = FirebaseAuth.instance.currentUser;
-          String? usuarioGoogle = user!.email;
-          if (_comprobarCredenciales(listaCredenciales, usuarioGoogle, pass))
+          if (_comprobarCredenciales(listaCredenciales, usuario, pass))
             Navigator.pushNamed(context, "home_screen");
         },
         child: Text(

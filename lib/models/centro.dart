@@ -361,10 +361,10 @@ class GruposActividad {
   });
 
   String totGrAct;
-  String grupo1;
-  String grupo2;
-  String grupo3;
-  String grupo4;
+  String? grupo1;
+  String? grupo2;
+  String? grupo3;
+  String? grupo4;
 
   factory GruposActividad.fromJson(String str) =>
       GruposActividad.fromMap(json.decode(str));

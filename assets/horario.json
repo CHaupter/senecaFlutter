@@ -1,4 +1,8 @@
-{"ASIGNATURA": [
+{
+   "CENTRO": {
+      "DATOS": {
+         "ASIGNATURAS": {
+            "ASIGNATURA": [
                {
                   "_num_int_as": "1",
                   "_abreviatura": "RECA1",

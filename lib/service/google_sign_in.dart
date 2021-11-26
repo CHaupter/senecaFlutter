@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:seneca_aplicacion/models/credenciales.dart';
+import 'package:seneca_aplicacion/providers/credenciales_provider.dart';
 import 'package:seneca_aplicacion/service/firebase_service.dart';
 
 class GoogleSignIn extends StatefulWidget {
@@ -16,6 +19,9 @@ class _GoogleSignInState extends State<GoogleSignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final credencialesProvider = Provider.of<CredencialesProvider>(context);
+    final lista = credencialesProvider.listaCredenciales;
+
     Size size = MediaQuery.of(context).size;
 
     return !isLoading
@@ -32,6 +38,12 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                 FirebaseService service = new FirebaseService();
                 try {
                   await service.signInWithGoogle();
+
+                  User? user = FirebaseAuth.instance.currentUser;
+                  String? usuarioGoogle = user!.email;
+                  if (_comprobarCredenciales(lista, usuarioGoogle)) {
+                    Navigator.pushNamed(context, "home_screen");
+                  }
                 } catch (e) {
                   if (e is FirebaseAuthException) {
                     print(e.message!);
@@ -58,4 +70,20 @@ class _GoogleSignInState extends State<GoogleSignIn> {
         : Container(
             margin: EdgeInsets.all(15), child: CircularProgressIndicator());
   }
+}
+
+bool _comprobarCredenciales(
+    List<Credenciales> listaCredenciales, String? usuario) {
+  bool credencialesCorrectas = false;
+
+  print(usuario);
+  print(listaCredenciales);
+  for (int i = 0; i < listaCredenciales.length; i++) {
+    print(listaCredenciales[i]);
+    if (listaCredenciales[i].usuario == usuario.toString()) {
+      credencialesCorrectas = true;
+    }
+  }
+
+  return credencialesCorrectas;
 }

@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:seneca_aplicacion/models/centro.dart';
 
 class CentroProvider extends ChangeNotifier {
-  List<Centro> listaCentro = [];
+  List<Profesor> listaProfesores = [];
+  List<HorarioProf> listaHorariosProfesores = [];
+  List<Tramo> listaTramos = [];
 
   CentroProvider() {
     print("Inicializado Centro Provider");
@@ -16,12 +18,14 @@ class CentroProvider extends ChangeNotifier {
   }
 
   getDatosCentro() async {
-    String respuesta = await _getJsonData();
-    print(respuesta);
+    final respuesta = await _getJsonData();
+    final centroResponse = CentroResponse.fromJson(respuesta);
 
-    final centroResponse = CentroResponse.fromMap(respuesta.);
+    listaProfesores = centroResponse.centro.datos.profesores.profesor;
+    listaHorariosProfesores =
+        centroResponse.centro.horarios.horariosProfesores.horarioProf;
+    listaTramos = centroResponse.centro.datos.tramosHorarios.tramo;
 
-    //listaCentro = centroResponse.centro;
     notifyListeners();
   }
 }
