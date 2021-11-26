@@ -216,18 +216,9 @@ class ComprobarCredenciales extends StatelessWidget {
         ),
         onPressed: () {
           User? user = FirebaseAuth.instance.currentUser;
-<<<<<<< HEAD
           String? usuarioGoogle = user!.email;
           if (_comprobarCredenciales(listaCredenciales, usuarioGoogle, pass))
             Navigator.pushNamed(context, "home_screen");
-=======
-          if (user != null) {
-            String? usuarioGoogle = user.email;
-
-            if (_comprobarCredenciales(listaCredenciales, usuarioGoogle, pass))
-              Navigator.pushNamed(context, "home_screen");
-          }
->>>>>>> 8e0f990d824069436b60f195e6c069b978ae4e7a
         },
         child: Text(
           "Entrar",
