@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "967095057475-47q9gj142nk3u51vpt0mk9mlr614b0n5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.seneca_aplicacion",
+            "certificate_hash": "8479eab2a657a199b4f1ed31a3acff9acea2856b"
+          }
+        },
+        {
           "client_id": "967095057475-uga5s4rcp1uuv0tjqnt971irhsj4sh4q.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -25,7 +25,6 @@ class CredencialesProvider extends ChangeNotifier {
   getCredencialesUsuario() async {
     String respuesta = await _getJsonData();
     respuesta = '{"results":' + respuesta + "}";
-    //respuesta = respuesta.substring(1, respuesta.length - 1);
 
     final credencialesResponse = CredencialesResponse.fromJson(respuesta);
 
