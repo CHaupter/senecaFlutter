@@ -19,11 +19,13 @@ class ListadoProfesores extends StatelessWidget {
     String nombreAula = "";
     DateTime now = DateTime.now();
 
-    DateTime fechaHora = DateTime.parse("hh:mm");
-
-    int dia = now.weekday;
-    int hora = now.hour;
-    int minuto = now.minute;
+    int cont = 0;
+    int dia = 5;
+    int hora;
+    int minuto;
+    List<String> horaInicio = [];
+    List<String> horaFinal = [];
+    bool diaEncontrado = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -35,15 +37,29 @@ class ListadoProfesores extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  /*id_aula =
-                      int.parse(listadoHorarios[index].actividad[index].aula);
-
+                  /*
                   _mostrarInformacion(context,
                       nombre: listadoProfesores[index].nombre,
                       tramos: listadoTramos,
                       horarios: listadoHorarios);*/
 
-                  print("$dia,$hora, $minuto");
+                  var splitHoraInicio = listadoTramos[0].horaInicio.split(":");
+                  horaInicio.add(splitHoraInicio[0]);
+                  horaInicio.add(splitHoraInicio[1]);
+
+                  var splitHoraFinal = listadoTramos[0].horaFinal.split(":");
+                  horaFinal.add(splitHoraFinal[0]);
+                  horaFinal.add(splitHoraFinal[1]);
+
+                  print("Hora inicio: " +
+                      horaInicio[0] +
+                      ", minuto inicio: " +
+                      horaInicio[1]);
+
+                  print("Hora final: " +
+                      horaFinal[0] +
+                      ", minuto final: " +
+                      horaFinal[1]);
                 },
                 child: ListTile(
                   title: Text(listadoProfesores[index].nombre),
