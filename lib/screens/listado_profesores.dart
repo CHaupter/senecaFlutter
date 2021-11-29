@@ -11,7 +11,7 @@ class ListadoProfesores extends StatelessWidget {
     final centroProvider = Provider.of<CentroProvider>(context);
     final listadoProfesores = centroProvider.listaProfesores;
     final listadoTramos = centroProvider.listaTramos;
-    final listadoHorarios = centroProvider.listaHorariosProfesores;
+    final listadoHorariosProfesores = centroProvider.listaHorariosProfesores;
 
     int id_aula = 0;
     String tramoInicio = "";
@@ -23,9 +23,12 @@ class ListadoProfesores extends StatelessWidget {
     int dia = 5;
     int hora;
     int minuto;
-    List<String> horaInicio = [];
-    List<String> horaFinal = [];
-    bool diaEncontrado = false;
+    int numeroTramo = 0;
+    List<String> horaInicio;
+    List<String> horaFinal;
+    List<String> splitHoraInicio;
+    List<String> splitHoraFinal;
+    bool tramoEncontrado = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -37,29 +40,30 @@ class ListadoProfesores extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  /*
-                  _mostrarInformacion(context,
-                      nombre: listadoProfesores[index].nombre,
-                      tramos: listadoTramos,
-                      horarios: listadoHorarios);*/
+                  splitHoraInicio = [];
+                  splitHoraFinal = [];
 
-                  var splitHoraInicio = listadoTramos[0].horaInicio.split(":");
-                  horaInicio.add(splitHoraInicio[0]);
-                  horaInicio.add(splitHoraInicio[1]);
+                  for (int i = 0; i < listadoTramos.length; i++) {
+                    splitHoraInicio = (listadoTramos[i].horaInicio.split(":"));
+                    splitHoraFinal = (listadoTramos[i].horaFinal.split(":"));
 
-                  var splitHoraFinal = listadoTramos[0].horaFinal.split(":");
-                  horaFinal.add(splitHoraFinal[0]);
-                  horaFinal.add(splitHoraFinal[1]);
+                    print("\nHora inicio: " +
+                        splitHoraInicio[0] +
+                        ":" +
+                        splitHoraInicio[1] +
+                        "\nHora actual: ${now.hour}:${now.minute}" +
+                        "\nHora final: " +
+                        splitHoraFinal[0] +
+                        ":" +
+                        splitHoraFinal[1]);
 
-                  print("Hora inicio: " +
-                      horaInicio[0] +
-                      ", minuto inicio: " +
-                      horaInicio[1]);
-
-                  print("Hora final: " +
-                      horaFinal[0] +
-                      ", minuto final: " +
-                      horaFinal[1]);
+                    if (now.hour < int.parse(splitHoraFinal[0])) {
+                      numeroTramo = int.parse(listadoTramos[i].numTr);
+                      print("Número de tramo: $numeroTramo");
+                    }
+                  }
+                  /*_mostrarInformacion(
+                      context, index, listadoHorariosProfesores, listadoTramos);*/
                 },
                 child: ListTile(
                   title: Text(listadoProfesores[index].nombre),
@@ -70,32 +74,11 @@ class ListadoProfesores extends StatelessWidget {
     );
   }
 
-  Future<void> _mostrarInformacion(BuildContext context, String nombre) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Horario de: '),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text("" + nombre),
-                Text('Aula: '),
-                Text('De ' + " a "),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Salir'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+  _mostrarInformacion(BuildContext context, int index,
+      List<HorarioProf> listadoHorariosProfesores, List<Tramo> listadoTramos) {
+    //Averiguo el numero de Tramo comparando con la hora actual
+
+    //Averiguo el horarioProf, comparando si el num_int_pr es igual a hor_num_int_pr
+    //Si es igual, saco el que tenga el mismo Tramo
   }
 }
