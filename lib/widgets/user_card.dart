@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seneca_aplicacion/main.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
@@ -61,11 +62,12 @@ class _UsuarioOpciones extends StatelessWidget {
                     margin: EdgeInsets.only(right: 10, top: 15),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.arrow_downward,
-                          color: Colors.grey,
-                        ),
-                        IconButton(onPressed: null, icon: Icon(Icons.person)),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/");
+                              LogOut();
+                            },
+                            icon: Icon(Icons.logout)),
                       ],
                     ),
                   )

@@ -11,6 +11,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  LogOut();
+
+  runApp(AppState());
+}
+
+void LogOut() async {
   FirebaseService service = new FirebaseService();
   try {
     await service.signOutFromGoogle();
@@ -19,8 +25,6 @@ void main() async {
       print(e.message!);
     }
   }
-
-  runApp(AppState());
 }
 
 class AppState extends StatelessWidget {

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seneca_aplicacion/main.dart';
 import 'package:seneca_aplicacion/models/credenciales.dart';
 import 'package:seneca_aplicacion/providers/credenciales_provider.dart';
 import 'package:seneca_aplicacion/service/google_sign_in.dart';
@@ -211,8 +212,12 @@ class ComprobarCredenciales extends StatelessWidget {
           backgroundColor: MaterialStateProperty.all(Colors.white),
         ),
         onPressed: () {
-          if (_comprobarCredenciales(listaCredenciales, usuario, pass))
+          if (_comprobarCredenciales(listaCredenciales, usuario, pass)) {
             Navigator.pushNamed(context, "home_screen");
+          } else {
+            _mostrarAlert(context);
+            LogOut();
+          }
         },
         child: Text(
           "Entrar",
@@ -226,10 +231,7 @@ class ComprobarCredenciales extends StatelessWidget {
       List<Credenciales> listaCredenciales, String? usuario, String pass) {
     bool credencialesCorrectas = false;
 
-    print(usuario);
-    print(listaCredenciales);
     for (int i = 0; i < listaCredenciales.length; i++) {
-      print(listaCredenciales[i]);
       if (listaCredenciales[i].usuario == usuario.toString()) {
         credencialesCorrectas = true;
       }
@@ -237,4 +239,28 @@ class ComprobarCredenciales extends StatelessWidget {
 
     return credencialesCorrectas;
   }
+}
+
+void _mostrarAlert(BuildContext context) {
+  showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+          title: Text("Error en la verificación"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text("No existe ninguna cuenta con esas credenciales"),
+              FlutterLogo(size: 100.0),
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.pop(context), child: Text("OK")),
+          ],
+        );
+      });
 }
