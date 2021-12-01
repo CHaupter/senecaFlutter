@@ -6,6 +6,8 @@ class CentroProvider extends ChangeNotifier {
   List<Profesor> listaProfesores = [];
   List<HorarioProf> listaHorariosProfesores = [];
   List<Tramo> listaTramos = [];
+  List<Asignatura> listaAsignaturas = [];
+  List<Aula> listaAulas = [];
 
   CentroProvider() {
     print("Inicializado Centro Provider");
@@ -25,6 +27,8 @@ class CentroProvider extends ChangeNotifier {
     listaHorariosProfesores =
         centroResponse.centro.horarios.horariosProfesores.horarioProf;
     listaTramos = centroResponse.centro.datos.tramosHorarios.tramo;
+    listaAsignaturas = centroResponse.centro.datos.asignaturas.asignatura;
+    listaAulas = centroResponse.centro.datos.aulas.aula;
 
     notifyListeners();
   }
