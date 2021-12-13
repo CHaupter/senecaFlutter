@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
-import "package:firebase_core/firebase_core.dart";
-
 import 'package:provider/provider.dart';
-import 'package:seneca_aplicacion/service/firebase_service.dart';
+import 'package:seneca_aplicacion/service/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +59,9 @@ class MyApp extends StatelessWidget {
         "parte_screen": (BuildContext context) => ParteScreen(),
         "personal_screen": (BuildContext context) => PersonalScreen(),
         "listado_screen": (BuildContext context) => ListadoProfesores(),
+        "contacto_screen": (BuildContext context) => ContactoScreen(),
+        "horario_screen": (BuildContext context) => HorarioScreen(),
+        "horario_prof_screen": (BuildContext context) => HorarioProfScreen(),
       },
     );
   }
