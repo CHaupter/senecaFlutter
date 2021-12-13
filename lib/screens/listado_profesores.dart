@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/providers/centro_provider.dart';
 
 // estoy dentro kkkkkk
+//bruhruhruhrurhurh
 class ListadoProfesores extends StatelessWidget {
   const ListadoProfesores({Key? key}) : super(key: key);
 
