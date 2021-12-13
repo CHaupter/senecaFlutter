@@ -15,11 +15,29 @@ class PersonalScreen extends StatelessWidget {
         child: ListView(
           children: [
             GestureDetector(
+              onTap: () => Navigator.pushNamed(context, "contacto_screen"),
+              child: Card(
+                child: ListTile(
+                  leading: FaIcon(FontAwesomeIcons.peopleCarry),
+                  title: Text('Mail/Teléfono'),
+                ),
+              ),
+            ),
+            GestureDetector(
               onTap: () => Navigator.pushNamed(context, "listado_screen"),
               child: Card(
                 child: ListTile(
                   leading: FaIcon(FontAwesomeIcons.peopleCarry),
                   title: Text('Profesores'),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () => Navigator.pushNamed(context, "horario_screen"),
+              child: Card(
+                child: ListTile(
+                  leading: FaIcon(FontAwesomeIcons.peopleCarry),
+                  title: Text('Horario'),
                 ),
               ),
             )

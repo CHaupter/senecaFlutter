@@ -76,8 +76,8 @@ int _averiguarTramo(BuildContext context) {
     splitHoraFinal = (listadoTramos[i].horaFinal.split(":"));
 
     if (int.parse(splitHoraInicio[0]) * 60 + int.parse(splitHoraInicio[1]) <=
-            45 + 13 * 60 &&
-        45 + 13 * 60 <
+            (now.minute + now.hour * 60) &&
+        (now.minute + now.hour * 60) <
             int.parse(splitHoraFinal[0]) * 60 + int.parse(splitHoraFinal[1]) &&
         int.parse(listadoTramos[i].numeroDia) == 1) {
       tramo = int.parse(listadoTramos[i].numTr);
