@@ -53,7 +53,7 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                     print(e.message!);
                   }
                   if (e is PlatformException) {
-                    print("No se ha seleccionado usuario");
+                    LogOut();
                   }
                 }
                 setState(() {
