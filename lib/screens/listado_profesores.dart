@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/providers/centro_provider.dart';
 
+// estoy dentro kkkkkk
 class ListadoProfesores extends StatelessWidget {
   const ListadoProfesores({Key? key}) : super(key: key);
 
