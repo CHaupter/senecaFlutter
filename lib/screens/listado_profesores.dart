@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:seneca_aplicacion/models/centro.dart';
 import 'package:seneca_aplicacion/providers/centro_provider.dart';
 
-// estoy dentro kkkkkk
-//bruhruhruhrurhurh
 class ListadoProfesores extends StatelessWidget {
   const ListadoProfesores({Key? key}) : super(key: key);
 
@@ -25,7 +24,7 @@ class ListadoProfesores extends StatelessWidget {
                   _mostrarAlert(context, index);
                 },
                 child: ListTile(
-                  title: Text(listadoProfesores[index].nombre),
+                  title: Text(listadoProfesores[index + 1].nombre),
                 ),
               );
             }),
@@ -34,24 +33,21 @@ class ListadoProfesores extends StatelessWidget {
   }
 }
 
-List<String> _averiguarHorario(BuildContext context, int tramo, int id_prof) {
+List<String> _averiguarHorario(BuildContext context, int id_prof, int tramo) {
   final centroProvider = Provider.of<CentroProvider>(context, listen: false);
   final listadoHorariosProfesores = centroProvider.listaHorariosProfesores;
-  List<String> horario = [];
+  List<String> horario = List.filled(2, "0");
 
   for (int i = 0; i < listadoHorariosProfesores.length; i++) {
     if (int.parse(listadoHorariosProfesores[i].horNumIntPr) == id_prof) {
       print("id iguales");
       for (int j = 0; j < listadoHorariosProfesores[i].actividad.length; j++) {
-        print("Tramo JSON: ${listadoHorariosProfesores[i].actividad[j].tramo}");
-        print("Tramo: $tramo");
-
         if (int.parse(listadoHorariosProfesores[i].actividad[j].tramo) ==
             tramo) {
           print("bruh");
-          horario.add(listadoHorariosProfesores[i].actividad[j].asignatura);
+          horario[0] = listadoHorariosProfesores[i].actividad[j].asignatura;
 
-          horario.add(listadoHorariosProfesores[i].actividad[j].aula);
+          horario[1] = listadoHorariosProfesores[i].actividad[j].aula;
 
           print("Asignatura: " + horario[0]);
           print("Aula: " + horario[1]);
@@ -63,13 +59,12 @@ List<String> _averiguarHorario(BuildContext context, int tramo, int id_prof) {
   return horario;
 }
 
-int _averiguarTramo(BuildContext context) {
-  final centroProvider = Provider.of<CentroProvider>(context, listen: false);
-  final listadoTramos = centroProvider.listaTramos;
+int _averiguarTramo(List<Tramo> listadoTramos) {
+  DateTime now = DateTime.now();
+  print(now.weekday);
 
   List<String> splitHoraInicio = [];
   List<String> splitHoraFinal = [];
-  DateTime now = DateTime.now();
 
   int tramo = 0;
 
@@ -81,7 +76,7 @@ int _averiguarTramo(BuildContext context) {
             (now.minute + now.hour * 60) &&
         (now.minute + now.hour * 60) <
             int.parse(splitHoraFinal[0]) * 60 + int.parse(splitHoraFinal[1]) &&
-        int.parse(listadoTramos[i].numeroDia) == 1) {
+        int.parse(listadoTramos[i].numeroDia) == now.weekday) {
       tramo = int.parse(listadoTramos[i].numTr);
       print("Número de tramo: $tramo");
     }
@@ -97,7 +92,9 @@ void _mostrarAlert(BuildContext context, int index) {
   final listadoAsignaturas = centroProvider.listaAsignaturas;
   final listadoAulas = centroProvider.listaAulas;
 
-  int tramo = _averiguarTramo(context);
+  int tramo = _averiguarTramo(listadoTramos);
+
+  print(" Tramo obtenido del método: $tramo");
   List<String> horario = _averiguarHorario(context, index, tramo);
   String horaInicio = "";
   String horaFinal = "";
@@ -107,7 +104,7 @@ void _mostrarAlert(BuildContext context, int index) {
 
   for (int i = 0; i < listadoAsignaturas.length; i++) {
     if (int.parse(listadoAsignaturas[i].numIntAs) == int.parse(horario[0])) {
-      asignatura = listadoAsignaturas[i].nombre[0];
+      asignatura = listadoAsignaturas[i].nombre;
     }
   }
 

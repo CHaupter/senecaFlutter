@@ -9,10 +9,14 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(children: [
           Background(),
-          Container(
-            child: Column(
-              children: [TitlePage(), UserCard(), ItemTable()],
-            ),
+          ListView(
+            children: [
+              Container(
+                child: Column(
+                  children: [TitlePage(), UserCard(), ItemTable()],
+                ),
+              )
+            ],
           )
         ]),
       ),

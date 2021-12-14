@@ -61,61 +61,63 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
 
     return Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: Stack(children: [
-          Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Color(0xFF005499), Color(0xFF01315a)])),
-            child: Padding(
-              padding: EdgeInsets.only(left: 30, right: 30, top: 120),
-              child: Center(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "iSéneca",
-                        style: TextStyle(
-                            fontSize: 60,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'ErasDemi'),
-                      ),
-                      Container(
-                        child: TextField(
-                          decoration: _inputDecorationUsuario,
-                          onChanged: (value) => setState(() {
-                            usuarioTexto = value;
-                          }),
-                          style: TextStyle(color: Colors.white),
+        resizeToAvoidBottomInset: false,
+        body: Center(
+          child: Stack(children: [
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Color(0xFF005499), Color(0xFF01315a)])),
+              child: Padding(
+                padding: EdgeInsets.only(left: 30, right: 30, top: 120),
+                child: Center(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "iSéneca",
+                          style: TextStyle(
+                              fontSize: 60,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'ErasDemi'),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                        child: TextField(
-                          decoration: _inputDecorationPass,
-                          onChanged: (value) => setState(() {
-                            passTexto = value;
-                          }),
-                          style: TextStyle(color: Colors.white),
-                          obscureText: mostrarTexto,
+                        Container(
+                          child: TextField(
+                            decoration: _inputDecorationUsuario,
+                            onChanged: (value) => setState(() {
+                              usuarioTexto = value;
+                            }),
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                      ComprobarCredenciales(
-                          listaCredenciales: lista,
-                          usuario: usuarioTexto,
-                          pass: passTexto),
-                      GoogleSignIn(),
-                      RecuperarPass(),
-                      TituloInferior()
-                    ]),
+                        Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: TextField(
+                            decoration: _inputDecorationPass,
+                            onChanged: (value) => setState(() {
+                              passTexto = value;
+                            }),
+                            style: TextStyle(color: Colors.white),
+                            obscureText: mostrarTexto,
+                          ),
+                        ),
+                        ComprobarCredenciales(
+                            listaCredenciales: lista,
+                            usuario: usuarioTexto,
+                            pass: passTexto),
+                        GoogleSignIn(),
+                        RecuperarPass(),
+                        TituloInferior()
+                      ]),
+                ),
               ),
             ),
-          ),
-        ]));
+          ]),
+        ));
   }
 }
 
