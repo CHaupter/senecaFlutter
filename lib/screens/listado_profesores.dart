@@ -24,7 +24,7 @@ class ListadoProfesores extends StatelessWidget {
                   _mostrarAlert(context, index);
                 },
                 child: ListTile(
-                  title: Text(listadoProfesores[index + 1].nombre),
+                  title: Text(listadoProfesores[index].nombre),
                 ),
               );
             }),
@@ -39,7 +39,7 @@ List<String> _averiguarHorario(BuildContext context, int id_prof, int tramo) {
   List<String> horario = List.filled(2, "0");
 
   for (int i = 0; i < listadoHorariosProfesores.length; i++) {
-    if (int.parse(listadoHorariosProfesores[i].horNumIntPr) == id_prof) {
+    if (int.parse(listadoHorariosProfesores[i].horNumIntPr) == id_prof + 1) {
       print("id iguales");
       for (int j = 0; j < listadoHorariosProfesores[i].actividad.length; j++) {
         if (int.parse(listadoHorariosProfesores[i].actividad[j].tramo) ==
@@ -59,14 +59,16 @@ List<String> _averiguarHorario(BuildContext context, int id_prof, int tramo) {
   return horario;
 }
 
-int _averiguarTramo(List<Tramo> listadoTramos) {
+int _averiguarTramo(
+    BuildContext context, List<Tramo> listadoTramos, int index) {
   DateTime now = DateTime.now();
   print(now.weekday);
 
   List<String> splitHoraInicio = [];
   List<String> splitHoraFinal = [];
-
+  List<int> tramosProhibidos = [5, 10, 25, 30, 45, 50, 65, 70, 85, 90];
   int tramo = 0;
+  int tramoCorrecto = 0;
 
   for (int i = 0; i < listadoTramos.length; i++) {
     splitHoraInicio = (listadoTramos[i].horaInicio.split(":"));
@@ -79,10 +81,32 @@ int _averiguarTramo(List<Tramo> listadoTramos) {
         int.parse(listadoTramos[i].numeroDia) == now.weekday) {
       tramo = int.parse(listadoTramos[i].numTr);
       print("Número de tramo: $tramo");
+      if (tramosProhibidos.contains(tramo)) {
+      } else {
+        if (comprobarTramo(context, tramo, index)) {
+          tramoCorrecto = tramo;
+          print("Tramo correcto: $tramoCorrecto");
+          return tramoCorrecto;
+        }
+      }
+    }
+  }
+  return tramo - 1;
+}
+
+bool comprobarTramo(BuildContext context, int tramo, int index) {
+  final centroProvider = Provider.of<CentroProvider>(context, listen: false);
+  final listadoHorarioProfesores = centroProvider.listaHorariosProfesores;
+  bool tramoCorrecto = false;
+
+  for (int i = 0; i < listadoHorarioProfesores[index].actividad.length; i++) {
+    if (int.parse(listadoHorarioProfesores[index].actividad[i].tramo) ==
+        tramo) {
+      tramoCorrecto = true;
     }
   }
 
-  return tramo;
+  return tramoCorrecto;
 }
 
 void _mostrarAlert(BuildContext context, int index) {
@@ -92,7 +116,7 @@ void _mostrarAlert(BuildContext context, int index) {
   final listadoAsignaturas = centroProvider.listaAsignaturas;
   final listadoAulas = centroProvider.listaAulas;
 
-  int tramo = _averiguarTramo(listadoTramos);
+  int tramo = _averiguarTramo(context, listadoTramos, index);
 
   print(" Tramo obtenido del método: $tramo");
   List<String> horario = _averiguarHorario(context, index, tramo);
@@ -108,15 +132,11 @@ void _mostrarAlert(BuildContext context, int index) {
     }
   }
 
-  print(asignatura);
   for (int i = 0; i < listadoAulas.length; i++) {
     if (int.parse(listadoAulas[i].numIntAu) == int.parse(horario[1])) {
-      print("ids aula iguales");
       aula = listadoAulas[i].nombre;
     }
   }
-  print(aula);
-
   for (int i = 0; i < listadoTramos.length; i++) {
     if (int.parse(listadoTramos[i].numTr) == tramo &&
         int.parse(listadoTramos[i].numeroDia) == now.weekday) {
@@ -137,9 +157,7 @@ void _mostrarAlert(BuildContext context, int index) {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text(
-                    "Se encuentra en el aula $aula impartiendo la asignatura $asignatura, de $horaInicio a $horaFinal"),
-                Text(" "),
+                mostrarHorario(aula, asignatura, horaInicio, horaFinal)
               ],
             ),
             actions: [
@@ -171,4 +189,13 @@ void _mostrarAlert(BuildContext context, int index) {
           );
         });
   }
+}
+
+Widget mostrarHorario(aula, asignatura, horaInicio, horaFinal) {
+  if (aula == "" && asignatura == "") {
+    return Text("No se encuentra disponible");
+  }
+
+  return Text(
+      "Se encuentra en el aula $aula impartiendo la asignatura $asignatura, de $horaInicio a $horaFinal");
 }
