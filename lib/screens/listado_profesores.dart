@@ -21,7 +21,7 @@ class ListadoProfesores extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  _mostrarAlert(context, index);
+                  _mostrarLocalizacion(context, index);
                 },
                 child: ListTile(
                   title: Text(listadoProfesores[index].nombre),
@@ -40,11 +40,9 @@ List<String> _averiguarHorario(BuildContext context, int id_prof, int tramo) {
 
   for (int i = 0; i < listadoHorariosProfesores.length; i++) {
     if (int.parse(listadoHorariosProfesores[i].horNumIntPr) == id_prof + 1) {
-      print("id iguales");
       for (int j = 0; j < listadoHorariosProfesores[i].actividad.length; j++) {
         if (int.parse(listadoHorariosProfesores[i].actividad[j].tramo) ==
             tramo) {
-          print("bruh");
           horario[0] = listadoHorariosProfesores[i].actividad[j].asignatura;
 
           horario[1] = listadoHorariosProfesores[i].actividad[j].aula;
@@ -82,6 +80,7 @@ int _averiguarTramo(
       tramo = int.parse(listadoTramos[i].numTr);
       print("Número de tramo: $tramo");
       if (tramosProhibidos.contains(tramo)) {
+        return tramo - 1;
       } else {
         if (comprobarTramo(context, tramo, index)) {
           tramoCorrecto = tramo;
@@ -91,7 +90,7 @@ int _averiguarTramo(
       }
     }
   }
-  return tramo - 1;
+  return tramo;
 }
 
 bool comprobarTramo(BuildContext context, int tramo, int index) {
@@ -99,8 +98,10 @@ bool comprobarTramo(BuildContext context, int tramo, int index) {
   final listadoHorarioProfesores = centroProvider.listaHorariosProfesores;
   bool tramoCorrecto = false;
 
-  for (int i = 0; i < listadoHorarioProfesores[index].actividad.length; i++) {
-    if (int.parse(listadoHorarioProfesores[index].actividad[i].tramo) ==
+  for (int i = 0;
+      i < listadoHorarioProfesores[index - 1].actividad.length;
+      i++) {
+    if (int.parse(listadoHorarioProfesores[index - 1].actividad[i].tramo) ==
         tramo) {
       tramoCorrecto = true;
     }
@@ -109,7 +110,7 @@ bool comprobarTramo(BuildContext context, int tramo, int index) {
   return tramoCorrecto;
 }
 
-void _mostrarAlert(BuildContext context, int index) {
+void _mostrarLocalizacion(BuildContext context, int index) {
   final centroProvider = Provider.of<CentroProvider>(context, listen: false);
   final listadoProfesores = centroProvider.listaProfesores;
   final listadoTramos = centroProvider.listaTramos;

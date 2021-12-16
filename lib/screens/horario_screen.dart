@@ -19,7 +19,7 @@ class HorarioScreen extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, "horario_prof_screen",
-                        arguments: listadoProfesores[index].nombre);
+                        arguments: index);
                   },
                   child: ListTile(
                     title: Text(listadoProfesores[index].nombre),
