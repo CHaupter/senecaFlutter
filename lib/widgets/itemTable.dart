@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seneca_aplicacion/screens/convivencia_screen.dart';
 import 'package:seneca_aplicacion/widgets/widgets.dart';
 
 class ItemTable extends StatelessWidget {
