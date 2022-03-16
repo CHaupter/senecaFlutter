@@ -20,14 +20,22 @@ class ContactoScreen extends StatelessWidget {
           child: ListView.builder(
               itemCount: listadoProfesores.length,
               itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    _mostrarAlert(context, index, listadoProfesores);
-                  },
-                  child: ListTile(
-                    title: Text(listadoProfesores[index].nombre),
-                  ),
-                );
+                if (index == 0) {
+                  return GestureDetector(
+                      onTap: () {
+                        null;
+                      },
+                      child: Container());
+                } else {
+                  return GestureDetector(
+                    onTap: () {
+                      _mostrarAlert(context, index, listadoProfesores);
+                    },
+                    child: ListTile(
+                      title: Text(listadoProfesores[index].nombre),
+                    ),
+                  );
+                }
               }),
         ),
       ),

@@ -17,6 +17,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.0+1
 
+
+flutter_localizations:
+    sdk: flutter  
+
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
@@ -39,6 +43,9 @@ dependencies:
 
   #Swiper
   flutter_swiper: ^1.1.6
+
+  #Calendario
+  syncfusion_flutter_calendar: ^19.4.56
 
   #Google Sign In
   firebase_auth: ^3.2.0

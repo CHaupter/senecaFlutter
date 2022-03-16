@@ -15,19 +15,17 @@ class ItemTable extends StatelessWidget {
             GestureDetector(
                 onTap: () => Navigator.pushNamed(context, "convivencia_screen"),
                 child: SingleCard(
-                    icon: Icons.people, text: "Alumnado del centro")),
+                    icon: "assets/sombrero.png", text: "Alumnado del centro")),
             GestureDetector(
               onTap: () => Navigator.pushNamed(context, "personal_screen"),
               child: SingleCard(
-                  icon: Icons.emoji_people_outlined,
-                  text: "Personal del centro"),
+                  icon: "assets/profesor.png", text: "Personal del centro"),
             ),
-            SingleCard(icon: Icons.sick, text: "Información Covid"),
+            SingleCard(icon: "assets/covid.png", text: "Información Covid"),
           ]),
           TableRow(children: [
-            SingleCard(
-                icon: Icons.tablet_mac_outlined, text: "Tablón de anuncios"),
-            SingleCard(icon: Icons.calendar_today, text: "Calendario escolar"),
+            SingleCard(icon: "assets/campana.png", text: "DACE"),
+            SingleCard(icon: "assets/calendario.png", text: "Baño"),
             Container()
           ])
         ],

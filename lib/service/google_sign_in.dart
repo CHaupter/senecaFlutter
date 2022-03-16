@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/main.dart';
-import 'package:seneca_aplicacion/models/credenciales.dart';
 import 'package:seneca_aplicacion/providers/credenciales_provider.dart';
 import 'package:seneca_aplicacion/service/firebase_service.dart';
 
@@ -42,9 +41,18 @@ class _GoogleSignInState extends State<GoogleSignIn> {
 
                   User? user = FirebaseAuth.instance.currentUser;
                   String? usuarioGoogle = user!.email;
-                  if (_comprobarCredenciales(lista, usuarioGoogle)) {
-                    Navigator.pushNamed(context, "main_screen");
-                  } else {
+
+                  bool existe = false;
+
+                  for (int i = 0; i < lista.length; i++) {
+                    print(lista[i].usuario);
+                    if (lista[i].usuario == usuarioGoogle.toString()) {
+                      existe = true;
+                      Navigator.pushNamed(context, "main_screen");
+                    }
+                  }
+
+                  if (!existe) {
                     _mostrarAlert(context);
                     LogOut();
                   }
@@ -74,22 +82,6 @@ class _GoogleSignInState extends State<GoogleSignIn> {
         : Container(
             margin: EdgeInsets.all(15), child: CircularProgressIndicator());
   }
-}
-
-bool _comprobarCredenciales(
-    List<Credenciales> listaCredenciales, String? usuario) {
-  bool credencialesCorrectas = false;
-
-  print(usuario);
-  print(listaCredenciales);
-  for (int i = 0; i < listaCredenciales.length; i++) {
-    print(listaCredenciales[i]);
-    if (listaCredenciales[i].usuario == usuario.toString()) {
-      credencialesCorrectas = true;
-    }
-  }
-
-  return credencialesCorrectas;
 }
 
 void _mostrarAlert(BuildContext context) {

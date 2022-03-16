@@ -13,6 +13,7 @@ class CredencialesProvider extends ChangeNotifier {
     print("Inicializado Cred Provider");
 
     this.getCredencialesUsuario();
+    notifyListeners();
   }
 
   Future<String> _getJsonData() async {
@@ -29,6 +30,5 @@ class CredencialesProvider extends ChangeNotifier {
     final credencialesResponse = CredencialesResponse.fromJson(respuesta);
 
     listaCredenciales = credencialesResponse.results;
-    notifyListeners();
   }
 }

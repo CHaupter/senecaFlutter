@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SingleCard extends StatelessWidget {
-  final IconData icon;
+  final String icon;
   final String text;
 
   const SingleCard({Key? key, required this.icon, required this.text})
@@ -12,29 +12,21 @@ class SingleCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-        height: size.height * 0.24,
+        height: size.height * 0.15,
+        margin: EdgeInsets.only(top: 20, right: 12),
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(right: 45, top: 45),
-              child: CircleAvatar(
-                radius: 0,
-                child: Icon(
-                  this.icon,
-                  size: 40,
-                  color: Colors.blue,
-                ),
+              height: 70,
+              width: 70,
+              child: Image.asset(
+                this.icon,
               ),
             ),
-            SizedBox(height: 40),
-            Container(
-              padding: EdgeInsets.only(left: 20),
-              child: Text(
-                this.text,
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
+            Text(
+              this.text,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             )
           ],
         ));

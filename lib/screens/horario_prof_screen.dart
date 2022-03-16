@@ -12,6 +12,16 @@ final tramosHorarios = [
   [14, 34, 54, 74, 94]
 ];
 
+List<String> horario = [
+  "8:15 a 9:15",
+  "9:15 a 10:15",
+  "10:15 a 11:15",
+  "11:15 a 11:45",
+  "11:45 a 12:45",
+  "12:45 a 13:45",
+  "13:45 a 14:45"
+];
+
 class HorarioProfScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -76,7 +86,7 @@ class HorarioProfScreen extends StatelessWidget {
   TableRow DiaHorario(BuildContext context, CentroProvider centroProvider,
       int index, List<int> tramosHorarios, int i) {
     return TableRow(children: [
-      devolverHorarios(context, centroProvider, index, i),
+      Text(horario[i]),
       devolverClase(context, centroProvider, index, tramosHorarios[0]),
       devolverClase(context, centroProvider, index, tramosHorarios[1]),
       devolverClase(context, centroProvider, index, tramosHorarios[2]),
@@ -84,25 +94,6 @@ class HorarioProfScreen extends StatelessWidget {
       devolverClase(context, centroProvider, index, tramosHorarios[4]),
     ]);
   }
-}
-
-Widget devolverHorarios(
-    BuildContext context, CentroProvider centroProvider, int index, int nFila) {
-  final listadoTramos = centroProvider.listaTramos;
-  final listadoHorarioProfesores = centroProvider.listaHorariosProfesores;
-  List<String> horario = [
-    "8:15 a 9:15",
-    "9:15 a 10:15",
-    "10:15 a 11:15",
-    "11:15 a 11:45",
-    "11:45 a 12:45",
-    "12:45 a 13:45",
-    "13:45 a 14:45"
-  ];
-
-  return Container(
-    child: Text(horario[nFila]),
-  );
 }
 
 Widget devolverClase(

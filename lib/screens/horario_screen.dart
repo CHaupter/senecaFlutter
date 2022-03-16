@@ -16,15 +16,23 @@ class HorarioScreen extends StatelessWidget {
           child: ListView.builder(
               itemCount: listadoProfesores.length,
               itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, "horario_prof_screen",
-                        arguments: index);
-                  },
-                  child: ListTile(
-                    title: Text(listadoProfesores[index].nombre),
-                  ),
-                );
+                if (index == 0) {
+                  return GestureDetector(
+                      onTap: () {
+                        null;
+                      },
+                      child: Container());
+                } else {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "horario_prof_screen",
+                          arguments: index);
+                    },
+                    child: ListTile(
+                      title: Text(listadoProfesores[index].nombre),
+                    ),
+                  );
+                }
               }),
         ),
       ),
