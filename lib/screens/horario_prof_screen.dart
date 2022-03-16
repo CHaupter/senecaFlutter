@@ -6,22 +6,10 @@ final tramosHorarios = [
   [2, 22, 42, 62, 82],
   [4, 24, 44, 64, 84],
   [6, 26, 46, 66, 86],
+  [7, 27, 47, 67, 87],
   [9, 29, 49, 69, 89],
-  [11, 32, 52, 72, 92],
-<<<<<<< HEAD
+  [12, 32, 52, 72, 92],
   [14, 34, 54, 74, 94]
-=======
-  [13, 34, 54, 74, 94]
->>>>>>> d0fd562bf1ce0d152441a4359cb19506a0a50a79
-];
-
-final horario = [
-  "8:15 a 9:15",
-  "9:15 a 10:15",
-  "10:15 a 11:15",
-  "11:45 a 12:45",
-  "12:45 a 13:45",
-  "13:45 a 14:45"
 ];
 
 class HorarioProfScreen extends StatelessWidget {
@@ -40,16 +28,35 @@ class HorarioProfScreen extends StatelessWidget {
       ),
       body: Container(
           decoration: BoxDecoration(color: Colors.blue),
-          child: Table(
-            border: TableBorder.all(),
+          child: Column(
             children: [
-              DiasSemana(),
-              DiaHorario(context, centroProvider, index, tramosHorarios[0], 0),
-              DiaHorario(context, centroProvider, index, tramosHorarios[1], 1),
-              DiaHorario(context, centroProvider, index, tramosHorarios[2], 2),
-              DiaHorario(context, centroProvider, index, tramosHorarios[3], 3),
-              DiaHorario(context, centroProvider, index, tramosHorarios[4], 4),
-              DiaHorario(context, centroProvider, index, tramosHorarios[5], 5),
+              Table(
+                border: TableBorder.all(),
+                children: [
+                  DiasSemana(),
+                  //8:15-9:15
+                  DiaHorario(
+                      context, centroProvider, index, tramosHorarios[0], 0),
+                  //9:15-10:15
+                  DiaHorario(
+                      context, centroProvider, index, tramosHorarios[1], 1),
+                  //10:15-11:15
+                  DiaHorario(
+                      context, centroProvider, index, tramosHorarios[2], 2),
+                  //11:15-11:45
+                  DiaHorario(
+                      context, centroProvider, index, tramosHorarios[3], 3),
+                  //11:45-12:45
+                  DiaHorario(
+                      context, centroProvider, index, tramosHorarios[4], 4),
+                  //12:45-13:45
+                  DiaHorario(
+                      context, centroProvider, index, tramosHorarios[5], 5),
+                  //13:45-14:45
+                  DiaHorario(
+                      context, centroProvider, index, tramosHorarios[6], 6),
+                ],
+              ),
             ],
           )),
     );
@@ -58,40 +65,51 @@ class HorarioProfScreen extends StatelessWidget {
   TableRow DiasSemana() {
     return TableRow(children: [
       Container(),
-      Container(
-          child: Text(
-        "L",
-        textAlign: TextAlign.center,
-      )),
+      Container(child: Text("L", textAlign: TextAlign.center)),
       Container(child: Text("M", textAlign: TextAlign.center)),
       Container(child: Text("X", textAlign: TextAlign.center)),
       Container(child: Text("J", textAlign: TextAlign.center)),
       Container(child: Text("V", textAlign: TextAlign.center)),
-      Container()
     ]);
   }
 
   TableRow DiaHorario(BuildContext context, CentroProvider centroProvider,
-      int index, List<int> tramosHorarios, int numDia) {
+      int index, List<int> tramosHorarios, int i) {
     return TableRow(children: [
-      Container(
-        child: Text(horario[numDia]),
-      ),
+      devolverHorarios(context, centroProvider, index, i),
       devolverClase(context, centroProvider, index, tramosHorarios[0]),
       devolverClase(context, centroProvider, index, tramosHorarios[1]),
       devolverClase(context, centroProvider, index, tramosHorarios[2]),
       devolverClase(context, centroProvider, index, tramosHorarios[3]),
       devolverClase(context, centroProvider, index, tramosHorarios[4]),
-      Container()
     ]);
   }
+}
+
+Widget devolverHorarios(
+    BuildContext context, CentroProvider centroProvider, int index, int nFila) {
+  final listadoTramos = centroProvider.listaTramos;
+  final listadoHorarioProfesores = centroProvider.listaHorariosProfesores;
+  List<String> horario = [
+    "8:15 a 9:15",
+    "9:15 a 10:15",
+    "10:15 a 11:15",
+    "11:15 a 11:45",
+    "11:45 a 12:45",
+    "12:45 a 13:45",
+    "13:45 a 14:45"
+  ];
+
+  return Container(
+    child: Text(horario[nFila]),
+  );
 }
 
 Widget devolverClase(
     BuildContext context, CentroProvider centroProvider, int index, int hora) {
   final listadoAulas = centroProvider.listaAulas;
   final listadoAsignaturas = centroProvider.listaAsignaturas;
-  final nuestroHorario = _averiguarHorario(context, index, hora);
+  List<String> nuestroHorario = _averiguarHorario(context, index, hora);
 
   String asignatura = "";
   String aula = "";
@@ -118,22 +136,13 @@ List<String> _averiguarHorario(BuildContext context, int id_prof, int tramo) {
   final centroProvider = Provider.of<CentroProvider>(context, listen: false);
   final listadoHorariosProfesores = centroProvider.listaHorariosProfesores;
   List<String> horario = List.filled(2, "0");
+  print("Tramo que entra en el método de averiguar horario: $tramo");
 
-  //Recorrer todos los horarios de los profesores
   for (int i = 0; i < listadoHorariosProfesores.length; i++) {
-    //Si coincide con el id del profesor, mira su horario
     if (int.parse(listadoHorariosProfesores[i].horNumIntPr) == id_prof + 1) {
       for (int j = 0; j < listadoHorariosProfesores[i].actividad.length; j++) {
-        //Si los tramos coinciden con los de la lista dada, obtiene el aula y la asignatura
-
         if (int.parse(listadoHorariosProfesores[i].actividad[j].tramo) ==
             tramo) {
-          print("---------------------------");
-          print("Tramo: " +
-              tramo.toString() +
-              ", tramo de JSON: " +
-              listadoHorariosProfesores[i].actividad[j].tramo);
-
           horario[0] = listadoHorariosProfesores[i].actividad[j].asignatura;
 
           horario[1] = listadoHorariosProfesores[i].actividad[j].aula;
