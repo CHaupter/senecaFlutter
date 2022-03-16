@@ -43,7 +43,7 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                   User? user = FirebaseAuth.instance.currentUser;
                   String? usuarioGoogle = user!.email;
                   if (_comprobarCredenciales(lista, usuarioGoogle)) {
-                    Navigator.pushNamed(context, "home_screen");
+                    Navigator.pushNamed(context, "main_screen");
                   } else {
                     _mostrarAlert(context);
                     LogOut();

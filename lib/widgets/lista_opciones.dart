@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:seneca_aplicacion/main.dart';
 
 class ListaOpciones extends StatefulWidget {
   @override
@@ -7,15 +7,10 @@ class ListaOpciones extends StatefulWidget {
 }
 
 class _ListaOpcionesState extends State<ListaOpciones> {
-  //bool esVisible = false;
-  double alturaOpciones = 0;
-  double anchuraOpciones = 0;
+  bool esVisible = false;
 
   @override
   Widget build(BuildContext context) {
-    anchuraOpciones = 120;
-    alturaOpciones = 100;
-
     return Container(
       child: Column(
         children: [
@@ -29,11 +24,7 @@ class _ListaOpcionesState extends State<ListaOpciones> {
                   alignment: Alignment.centerRight,
                   onPressed: () {
                     setState(() {
-                      //esVisible = !esVisible;
-
-                      alturaOpciones = 300;
-                      anchuraOpciones = 200;
-                      //print(esVisible);
+                      esVisible = !esVisible;
                     });
                   },
                   icon: Icon(Icons.more_vert_sharp),
@@ -42,28 +33,27 @@ class _ListaOpcionesState extends State<ListaOpciones> {
               ),
             ],
           ),
-          AnimatedContainer(
-            margin: EdgeInsets.only(right: 10),
-            color: Colors.red,
-            height: 100,
-            width: 120,
-            curve: Curves.ease,
-            duration: Duration(milliseconds: 1000),
+          Visibility(
+            visible: esVisible,
             child: Row(
               children: [
                 Expanded(child: Container()),
                 Container(
+                    height: 400,
+                    width: 220,
                     child: ListView(children: [
-                  GestureDetector(
-                    onTap: () =>
-                        Navigator.pushNamed(context, "contacto_screen"),
-                    child: Card(
-                      child: ListTile(
-                        title: Text('Mail/Teléfono'),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          LogOut();
+                        },
+                        child: Card(
+                          child: ListTile(
+                            title: Text('Cerrar sesión'),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ])),
+                    ])),
               ],
             ),
           )

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seneca_aplicacion/screens/convivencia_screen.dart';
 import 'package:seneca_aplicacion/widgets/widgets.dart';
 
 class ItemTable extends StatelessWidget {
@@ -11,9 +10,6 @@ class ItemTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Table(
-        border: TableBorder(
-            verticalInside: BorderSide(color: Colors.grey, width: 0.5),
-            horizontalInside: BorderSide(color: Colors.grey, width: 0.5)),
         children: [
           TableRow(children: [
             GestureDetector(

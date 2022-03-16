@@ -21,7 +21,7 @@ class UserCard extends StatelessWidget {
         ],
       ),
       width: 400,
-      height: 200,
+      height: 185,
       child: Column(
         children: [
           _UsuarioOpciones(),

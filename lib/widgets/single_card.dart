@@ -12,12 +12,11 @@ class SingleCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Container(
-        margin: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-        height: size.height * 0.27,
+        height: size.height * 0.24,
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(right: 45, top: 60),
+              padding: EdgeInsets.only(right: 45, top: 45),
               child: CircleAvatar(
                 radius: 0,
                 child: Icon(
@@ -27,7 +26,7 @@ class SingleCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 45),
+            SizedBox(height: 40),
             Container(
               padding: EdgeInsets.only(left: 20),
               child: Text(

@@ -8,3 +8,6 @@ export 'package:seneca_aplicacion/screens/contacto_screen.dart';
 export 'package:seneca_aplicacion/screens/horario_screen.dart';
 
 export 'package:seneca_aplicacion/screens/horario_prof_screen.dart';
+
+export 'package:seneca_aplicacion/screens/agenda_screen.dart';
+export 'package:seneca_aplicacion/screens/comunicacion_screen.dart';

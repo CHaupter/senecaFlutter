@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
+import 'package:seneca_aplicacion/screens/main_screen.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/service/services.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (BuildContext context) => LoginScreen(),
         "home_screen": (BuildContext context) => HomeScreen(),
+        "main_screen": (BuildContext context) => MainScreen(),
         "convivencia_screen": (BuildContext context) => ConvivenciaScreen(),
         "parte_screen": (BuildContext context) => ParteScreen(),
         "personal_screen": (BuildContext context) => PersonalScreen(),

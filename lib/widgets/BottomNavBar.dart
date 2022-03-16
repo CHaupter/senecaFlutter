@@ -1,15 +1,20 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+  int currentIndex;
+  PageController controller;
+
+  BottomNavBar(this.currentIndex, this.controller, {Key? key})
+      : super(key: key);
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  int index = 0;
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -17,18 +22,27 @@ class _BottomNavBarState extends State<BottomNavBar> {
       selectedItemColor: Color(0xFF02569d),
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
-      currentIndex: index,
+      currentIndex: widget.currentIndex,
+      onTap: (value) {
+        setState(() {
+          widget.currentIndex = value;
+
+          widget.controller.animateToPage(widget.currentIndex,
+              duration: Duration(milliseconds: 500), curve: Curves.ease);
+        });
+      },
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
         BottomNavigationBarItem(icon: Icon(Icons.timelapse), label: "Agenda"),
         BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline), label: "Comunicaciones"),
       ],
-      onTap: (value) {
-        setState(() {
-          index = value;
-        });
-      },
     );
+  }
+
+  setBottomIndex(int value) {
+    setState(() {
+      widget.currentIndex = value;
+    });
   }
 }

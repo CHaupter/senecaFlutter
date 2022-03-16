@@ -77,7 +77,7 @@ void _mostrarAlert(
       });
 }
 
-List<String> _averiguarHorario(BuildContext context, int tramo, int id_prof) {
+/*List<String> _averiguarHorario(BuildContext context, int tramo, int id_prof) {
   final centroProvider = Provider.of<CentroProvider>(context, listen: false);
   final listadoHorariosProfesores = centroProvider.listaHorariosProfesores;
   List<String> horario = [];
@@ -104,4 +104,4 @@ List<String> _averiguarHorario(BuildContext context, int tramo, int id_prof) {
   }
 
   return horario;
-}
+}*/

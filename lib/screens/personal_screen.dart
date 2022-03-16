@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:seneca_aplicacion/screens/screens.dart';
 
 class PersonalScreen extends StatelessWidget {
   const PersonalScreen({Key? key}) : super(key: key);
