@@ -14,7 +14,8 @@ class PersonalScreen extends StatelessWidget {
         child: ListView(
           children: [
             GestureDetector(
-              onTap: () => Navigator.pushNamed(context, "contacto_screen"),
+              onTap: () =>
+                  Navigator.pushNamed(context, "contacto_profesores_screen"),
               child: Card(
                 child: ListTile(
                   leading: FaIcon(FontAwesomeIcons.peopleCarry),
@@ -23,7 +24,8 @@ class PersonalScreen extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => Navigator.pushNamed(context, "listado_screen"),
+              onTap: () =>
+                  Navigator.pushNamed(context, "listado_profesores_screen"),
               child: Card(
                 child: ListTile(
                   leading: FaIcon(FontAwesomeIcons.peopleCarry),

@@ -50,7 +50,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      supportedLocales: [const Locale('en'), const Locale('es')],
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
       routes: {
@@ -62,12 +61,16 @@ class MyApp extends StatelessWidget {
         "personal_screen": (BuildContext context) => PersonalScreen(),
         "listado_profesores_screen": (BuildContext context) =>
             ListadoProfesores(),
-        "contacto_screen": (BuildContext context) => ContactoProfesoresScreen(),
+        "contacto_profesores_screen": (BuildContext context) =>
+            ContactoProfesoresScreen(),
         "horario_profesores_screen": (BuildContext context) =>
             HorarioProfesoresScreen(),
         "horario_profesores_detalles_screen": (BuildContext context) =>
             HorarioProfesoresDetallesScreen(),
         "alumnado_screen": (BuildContext context) => AlumnadoScreen(),
+        "contacto_alumnado_screen": (BuildContext context) => AlumnadoScreen(),
+        "listado_alumnado_screen": (BuildContext context) => AlumnadoScreen(),
+        "horario_alumnado_screen": (BuildContext context) => AlumnadoScreen(),
       },
     );
   }
