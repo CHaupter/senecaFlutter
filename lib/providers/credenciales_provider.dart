@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:seneca_aplicacion/models/credenciales.dart';
+import 'package:seneca_aplicacion/models/credenciales_response.dart';
 
 class CredencialesProvider extends ChangeNotifier {
   String _baseUrl = "opensheet.vercel.app";

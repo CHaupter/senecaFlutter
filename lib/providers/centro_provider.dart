@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:seneca_aplicacion/models/centro.dart';
+import 'package:seneca_aplicacion/models/centro_response.dart';
 
 class CentroProvider extends ChangeNotifier {
   List<Profesor> listaProfesores = [];

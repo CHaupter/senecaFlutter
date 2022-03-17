@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seneca_aplicacion/models/centro.dart';
+import 'package:seneca_aplicacion/models/centro_response.dart';
 import 'package:seneca_aplicacion/providers/centro_provider.dart';
 
 class ListadoProfesores extends StatelessWidget {

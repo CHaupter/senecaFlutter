@@ -34,6 +34,10 @@ class AppState extends StatelessWidget {
           lazy: false,
         ),
         ChangeNotifierProvider(
+          create: (_) => AlumnadoProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
           create: (_) => CentroProvider(),
           lazy: false,
         )
@@ -68,9 +72,14 @@ class MyApp extends StatelessWidget {
         "horario_profesores_detalles_screen": (BuildContext context) =>
             HorarioProfesoresDetallesScreen(),
         "alumnado_screen": (BuildContext context) => AlumnadoScreen(),
-        "contacto_alumnado_screen": (BuildContext context) => AlumnadoScreen(),
-        "listado_alumnado_screen": (BuildContext context) => AlumnadoScreen(),
-        "horario_alumnado_screen": (BuildContext context) => AlumnadoScreen(),
+        "contacto_alumnado_screen": (BuildContext context) =>
+            ContactoAlumnadoScreen(),
+        "listado_alumnado_screen": (BuildContext context) =>
+            ListadoAlumnadoScreen(),
+        "horario_alumnado_screen": (BuildContext context) =>
+            HorarioAlumnadoScreen(),
+        "contacto_detalles_alumnado_screen": (BuildContext context) =>
+            ContactoDetallesAlumnadoScreen(),
       },
     );
   }

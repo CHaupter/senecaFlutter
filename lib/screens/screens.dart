@@ -22,3 +22,4 @@ export 'package:seneca_aplicacion/screens/alumnado/alumnado_screen.dart';
 export 'package:seneca_aplicacion/screens/alumnado/contacto_alumnado_screen.dart';
 export 'package:seneca_aplicacion/screens/alumnado/horario_alumnado_screen.dart';
 export 'package:seneca_aplicacion/screens/alumnado/listado_alumnado_screen.dart';
+export 'package:seneca_aplicacion/screens/alumnado/contacto_detalles_alumnado_screen.dart';
