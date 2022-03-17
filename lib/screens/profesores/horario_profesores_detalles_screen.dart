@@ -22,7 +22,7 @@ List<String> horario = [
   "13:45 a 14:45"
 ];
 
-class HorarioProfScreen extends StatelessWidget {
+class HorarioProfesoresDetallesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final index = ModalRoute.of(context)!.settings.arguments as int;

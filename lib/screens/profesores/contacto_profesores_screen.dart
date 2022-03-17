@@ -6,7 +6,7 @@ import 'package:seneca_aplicacion/models/centro.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ContactoScreen extends StatelessWidget {
+class ContactoProfesoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final centroProvider = Provider.of<CentroProvider>(context);

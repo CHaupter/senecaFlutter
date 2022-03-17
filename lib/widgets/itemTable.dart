@@ -13,7 +13,7 @@ class ItemTable extends StatelessWidget {
         children: [
           TableRow(children: [
             GestureDetector(
-                onTap: () => Navigator.pushNamed(context, "convivencia_screen"),
+                onTap: () => Navigator.pushNamed(context, "alumnado_screen"),
                 child: SingleCard(
                     icon: "assets/sombrero.png", text: "Alumnado del centro")),
             GestureDetector(
@@ -21,11 +21,20 @@ class ItemTable extends StatelessWidget {
               child: SingleCard(
                   icon: "assets/profesor.png", text: "Personal del centro"),
             ),
-            SingleCard(icon: "assets/covid.png", text: "Información Covid"),
+            GestureDetector(
+              onTap: () => Navigator.pushNamed(context, "convivencia_screen"),
+              child: SingleCard(icon: "assets/covid.png", text: "Convivencia"),
+            ),
           ]),
           TableRow(children: [
-            SingleCard(icon: "assets/campana.png", text: "DACE"),
-            SingleCard(icon: "assets/calendario.png", text: "Baño"),
+            GestureDetector(
+              onTap: () {},
+              child: SingleCard(icon: "assets/campana.png", text: "DACE"),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: SingleCard(icon: "assets/calendario.png", text: "Baño"),
+            ),
             Container()
           ])
         ],

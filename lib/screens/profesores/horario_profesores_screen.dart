@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
 
-class HorarioScreen extends StatelessWidget {
+class HorarioProfesoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final centroProvider = Provider.of<CentroProvider>(context);
@@ -25,7 +25,8 @@ class HorarioScreen extends StatelessWidget {
                 } else {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, "horario_prof_screen",
+                      Navigator.pushNamed(
+                          context, "horario_profesores_detalles_screen",
                           arguments: index);
                     },
                     child: ListTile(

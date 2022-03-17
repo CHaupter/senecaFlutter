@@ -21,6 +21,14 @@ class _ListaOpcionesState extends State<ListaOpciones> {
               ),
               Container(
                 child: IconButton(
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Colors.white,
+                    )),
+              ),
+              Container(
+                child: IconButton(
                   alignment: Alignment.centerRight,
                   onPressed: () {
                     setState(() {

@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:seneca_aplicacion/screens/agenda_screen.dart';
-import 'package:seneca_aplicacion/screens/home_screen.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
 
 class MainScreen extends StatefulWidget {

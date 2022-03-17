@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
-import 'package:seneca_aplicacion/screens/main_screen.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/service/services.dart';
@@ -61,10 +60,14 @@ class MyApp extends StatelessWidget {
         "convivencia_screen": (BuildContext context) => ConvivenciaScreen(),
         "parte_screen": (BuildContext context) => ParteScreen(),
         "personal_screen": (BuildContext context) => PersonalScreen(),
-        "listado_screen": (BuildContext context) => ListadoProfesores(),
-        "contacto_screen": (BuildContext context) => ContactoScreen(),
-        "horario_screen": (BuildContext context) => HorarioScreen(),
-        "horario_prof_screen": (BuildContext context) => HorarioProfScreen(),
+        "listado_profesores_screen": (BuildContext context) =>
+            ListadoProfesores(),
+        "contacto_screen": (BuildContext context) => ContactoProfesoresScreen(),
+        "horario_profesores_screen": (BuildContext context) =>
+            HorarioProfesoresScreen(),
+        "horario_profesores_detalles_screen": (BuildContext context) =>
+            HorarioProfesoresDetallesScreen(),
+        "alumnado_screen": (BuildContext context) => AlumnadoScreen(),
       },
     );
   }

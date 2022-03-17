@@ -32,7 +32,8 @@ class PersonalScreen extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => Navigator.pushNamed(context, "horario_screen"),
+              onTap: () =>
+                  Navigator.pushNamed(context, "horario_profesores_screen"),
               child: Card(
                 child: ListTile(
                   leading: FaIcon(FontAwesomeIcons.peopleCarry),
