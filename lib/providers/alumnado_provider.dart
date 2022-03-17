@@ -26,14 +26,6 @@ class AlumnadoProvider extends ChangeNotifier {
     getHorario();
   }
 
-  // Future<String> _getJsonData(String baseurl, String api, String pagina) async {
-  //   var url = Uri.parse("https://" + baseurl + "/" + api + "/" + pagina);
-
-  //   final response = await http.post(url);
-
-  //   return response.body;
-  // }
-
   Future<String> _getJsonData(String baseurl, String api, String pagina) async {
     final url = Uri.https(baseurl, api + "/" + pagina);
 

@@ -57,6 +57,9 @@ dependencies:
   #Google Icon
   font_awesome_flutter: ^9.0.0
 
+  #AZ List View
+  azlistview: ^2.0.0-nullsafety.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

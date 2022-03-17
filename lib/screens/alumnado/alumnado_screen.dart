@@ -25,7 +25,7 @@ class AlumnadoScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () =>
-                  Navigator.pushNamed(context, "listado_alumnado_screen"),
+                  Navigator.pushNamed(context, "localizacion_alumnado_screen"),
               child: Card(
                 child: ListTile(
                   leading: FaIcon(FontAwesomeIcons.peopleCarry),

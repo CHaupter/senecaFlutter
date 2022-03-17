@@ -74,8 +74,8 @@ class MyApp extends StatelessWidget {
         "alumnado_screen": (BuildContext context) => AlumnadoScreen(),
         "contacto_alumnado_screen": (BuildContext context) =>
             ContactoAlumnadoScreen(),
-        "listado_alumnado_screen": (BuildContext context) =>
-            ListadoAlumnadoScreen(),
+        "localizacion_alumnado_screen": (BuildContext context) =>
+            LocalizacionAlumnadoScreen(),
         "horario_alumnado_screen": (BuildContext context) =>
             HorarioAlumnadoScreen(),
         "contacto_detalles_alumnado_screen": (BuildContext context) =>
