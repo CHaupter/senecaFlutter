@@ -68,7 +68,7 @@ class AlumnadoProvider extends ChangeNotifier {
 
   getHorario() async {
     String jsonData = await this._getJsonData(_url, _api, _hojaHorario);
-    jsonData = '{"results":' + jsonData.substring(1, jsonData.length) + '}';
+    jsonData = '{"results":' + jsonData + '}';
     final cursosResponse = HorarioResponse.fromJson(jsonData);
     listadoHorarios = cursosResponse.result;
     notifyListeners();
