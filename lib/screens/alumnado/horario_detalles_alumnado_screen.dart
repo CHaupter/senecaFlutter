@@ -64,7 +64,12 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
       "13:00 a 14:00"
     ];
     return TableRow(decoration: BoxDecoration(color: Colors.white), children: [
-      Container(color: Colors.blue, child: Text(horario[horaDia])),
+      Container(
+          color: Colors.blue,
+          child: Text(
+            horario[horaDia],
+            style: TextStyle(fontSize: 18),
+          )),
       devolverClase(context, index, horaDia, 0),
       devolverClase(context, index, horaDia, 1),
       devolverClase(context, index, horaDia, 2),
@@ -112,7 +117,20 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
     // }
 
     return Container(
-      child: Column(children: [Text(asignatura), Text(aula)]),
+      child: Column(children: [
+        Text(
+          asignatura.toUpperCase(),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+        ),
+        Text(
+          aula.toUpperCase(),
+          style: TextStyle(fontWeight: FontWeight.bold),
+        )
+      ]),
     );
   }
 }

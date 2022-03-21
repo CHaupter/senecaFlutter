@@ -78,14 +78,6 @@ class _ContentState extends State<Content> {
                 fontWeight: FontWeight.bold
               ),
             ),*/
-
-            Divider(
-              height: 18,
-              color: Colors.white,
-              indent: 77,
-              endIndent: 77,
-            ),
-
             SizedBox(height: 100),
 
             //Logo

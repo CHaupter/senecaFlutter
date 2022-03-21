@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:seneca_aplicacion/models/models.dart';
 
 class ProviderExpulsadosResponse extends ChangeNotifier {
+  //JSON de Expulsados
+  //opensheet.vercel.app/1YNtm8Aqdz0Gth_xJN7QZffE8_U3CcWj1gM2wCwFwlHQ/expulsados
   String _idHoja = '1YNtm8Aqdz0Gth_xJN7QZffE8_U3CcWj1gM2wCwFwlHQ';
   String _baseUrl = 'opensheet.vercel.app';
   String _nombreHoja = 'expulsados';
