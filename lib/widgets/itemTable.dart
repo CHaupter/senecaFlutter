@@ -32,7 +32,7 @@ class ItemTable extends StatelessWidget {
               child: SingleCard(icon: "assets/campana.png", text: "DACE"),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, "servicio_screen"),
               child: SingleCard(icon: "assets/calendario.png", text: "Baño"),
             ),
             Container()

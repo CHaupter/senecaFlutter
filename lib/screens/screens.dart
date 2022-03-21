@@ -27,3 +27,10 @@ export 'package:seneca_aplicacion/screens/convivencia/mayores_screen.dart';
 
 //Archivos de DACE
 export 'package:seneca_aplicacion/screens/dace/dace_screen.dart';
+
+//Archivos de Baño
+
+export 'package:seneca_aplicacion/screens/servicio/servicio_es_alumnos_screen.dart';
+export 'package:seneca_aplicacion/screens/servicio/servicio_es_screen.dart';
+export 'package:seneca_aplicacion/screens/servicio/servicio_informes_screen.dart';
+export 'package:seneca_aplicacion/screens/servicio/servicio_screen.dart';

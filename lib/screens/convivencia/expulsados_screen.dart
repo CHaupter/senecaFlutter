@@ -18,17 +18,17 @@ class ExpulsadosScreen extends StatelessWidget {
     // DateTime now = DateTime.now();
 
     for (int i = 0; i < listadoExpulsados.length; i++) {
-      print('Dentro del for');
-      final listaExpulsion = listadoExpulsados[i].fec_inic.split("-");
-      print(listaExpulsion);
+      // print('Dentro del for');
+      // final listaExpulsion = listadoExpulsados[i].fec_inic.split("-");
+      // print(listaExpulsion);
 
       // if (int.parse(listaExpulsion[0]) == now.year &&
       //     int.parse(listaExpulsion[1]) == now.month &&
       //     int.parse(listaExpulsion[2]) == now.day) {
       listadoExpulsadosHoy.add(listadoExpulsados[i]);
       listadoExpulsadosHoy.sort((a, b) => b.fec_fin.compareTo(a.fec_fin));
-      print('Entra en el if');
-      print(listadoExpulsadosHoy);
+      // print('Entra en el if');
+      // print(listadoExpulsadosHoy);
       // }
     }
 
@@ -36,8 +36,8 @@ class ExpulsadosScreen extends StatelessWidget {
       for (int j = 0; j < listadoAlumnos.length; j++) {
         if (listadoExpulsadosHoy[i].apellidosNombre ==
             listadoAlumnos[j].nombre) {
-          print(listadoExpulsadosHoy[i].apellidosNombre);
-          print(listadoAlumnos[j].nombre);
+          // print(listadoExpulsadosHoy[i].apellidosNombre);
+          // print(listadoAlumnos[j].nombre);
           listadoAlumnos[j].email;
           listadoAlumnos[j].telefonoAlumno;
           listadoAlumnos[j].telefonoMadre;
@@ -48,12 +48,12 @@ class ExpulsadosScreen extends StatelessWidget {
       }
     }
 
-    for (int j = 0; j < cogerDatosExpulsados.length; j++) {
-      print(cogerDatosExpulsados[j].email);
-      print(cogerDatosExpulsados[j].telefonoAlumno);
-      print(cogerDatosExpulsados[j].telefonoMadre);
-      print(cogerDatosExpulsados[j].telefonoPadre);
-    }
+    // for (int j = 0; j < cogerDatosExpulsados.length; j++) {
+    //   print(cogerDatosExpulsados[j].email);
+    //   print(cogerDatosExpulsados[j].telefonoAlumno);
+    //   print(cogerDatosExpulsados[j].telefonoMadre);
+    //   print(cogerDatosExpulsados[j].telefonoPadre);
+    // }
 
     return Scaffold(
       appBar: AppBar(
