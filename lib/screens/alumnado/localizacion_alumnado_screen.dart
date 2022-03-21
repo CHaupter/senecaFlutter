@@ -22,22 +22,23 @@ class _LocalizacionAlumnadoScreenState
     final listadoAlumnos = alumnadoProvider.listadoAlumnos;
     final listadoHorarios = alumnadoProvider.listadoHorarios;
 
-    List<String> nombreAlumnos = [];
+    List<DatosAlumnos> listaOrdenada = [];
+    listaOrdenada.addAll(listadoAlumnos);
 
-    listadoAlumnos.sort(((a, b) => a.nombre.compareTo(b.nombre)));
+    listaOrdenada.sort(((a, b) => a.nombre.compareTo(b.nombre)));
     return Scaffold(
       appBar: AppBar(title: Text("LOCALIZACION ALUMNOS")),
       body: Container(
         child: ListView.builder(
-            itemCount: listadoAlumnos.length,
+            itemCount: listaOrdenada.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                   onTap: () {
                     _mostrarAlert(
-                        context, index, listadoAlumnos, listadoHorarios);
+                        context, index, listaOrdenada, listadoHorarios);
                   },
                   child: ListTile(
-                    title: Text(listadoAlumnos[index].nombre),
+                    title: Text(listaOrdenada[index].nombre),
                   ));
             }),
       ),
@@ -61,7 +62,7 @@ class _LocalizacionAlumnadoScreenState
 
     int hora = ahora.hour;
     int dia = ahora.weekday;
-    print(dia);
+    // print(dia);
 
     String asignatura = "";
     String aula = "";
@@ -69,8 +70,13 @@ class _LocalizacionAlumnadoScreenState
 
     List<HorarioResult> listadoHorarioCursoDia = [];
     for (int i = 0; i < 6; i++) {
-      listadoHorarioCursoDia.add(listadoHorarioCurso[i + (6 * (dia - 1))]);
-      print("Dias: ${listadoHorarioCurso[i].dia}");
+      if (dia == 1) {
+        listadoHorarioCursoDia.add(listadoHorarioCurso[i]);
+        // print("Dias: ${listadoHorarioCurso[i].dia}");
+      } else {
+        listadoHorarioCursoDia.add(listadoHorarioCurso[i + (6 * (dia - 1))]);
+        // print("Dias: ${listadoHorarioCurso[i + (6 * (dia - 1))].dia}");
+      }
     }
 
     for (int i = 0; i < listadoHorarioCursoDia.length; i++) {

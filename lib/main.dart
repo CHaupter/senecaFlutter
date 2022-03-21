@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
+import 'package:seneca_aplicacion/screens/alumnado/horario_detalles_alumnado_screen.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/service/services.dart';
@@ -78,6 +79,8 @@ class MyApp extends StatelessWidget {
             LocalizacionAlumnadoScreen(),
         "horario_alumnado_screen": (BuildContext context) =>
             HorarioAlumnadoScreen(),
+        "horario_detalles_alumnado_screen": (BuildContext context) =>
+            HorarioDetallesAlumnadoScreen(),
         "contacto_detalles_alumnado_screen": (BuildContext context) =>
             ContactoDetallesAlumnadoScreen(),
       },
