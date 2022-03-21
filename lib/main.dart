@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
-import 'package:seneca_aplicacion/screens/alumnado/horario_detalles_alumnado_screen.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/service/services.dart';
@@ -35,11 +34,23 @@ class AppState extends StatelessWidget {
           lazy: false,
         ),
         ChangeNotifierProvider(
+          create: (_) => ProviderExpulsadosResponse(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProviderMayoresResponse(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
           create: (_) => AlumnadoProvider(),
           lazy: false,
         ),
         ChangeNotifierProvider(
           create: (_) => CentroProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DaceProvider(),
           lazy: false,
         )
       ],
@@ -62,7 +73,9 @@ class MyApp extends StatelessWidget {
         "home_screen": (BuildContext context) => HomeScreen(),
         "main_screen": (BuildContext context) => MainScreen(),
         "convivencia_screen": (BuildContext context) => ConvivenciaScreen(),
-        "parte_screen": (BuildContext context) => ParteScreen(),
+        "expulsados_screen": (BuildContext context) => ExpulsadosScreen(),
+        "mayores_screen": (BuildContext context) => MayoresScreen(),
+        "dace_screen": (BuildContext context) => DaceScreen(),
         "personal_screen": (BuildContext context) => PersonalScreen(),
         "listado_profesores_screen": (BuildContext context) =>
             ListadoProfesores(),

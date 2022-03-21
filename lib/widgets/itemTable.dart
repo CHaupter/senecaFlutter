@@ -28,7 +28,7 @@ class ItemTable extends StatelessWidget {
           ]),
           TableRow(children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, "dace_screen"),
               child: SingleCard(icon: "assets/campana.png", text: "DACE"),
             ),
             GestureDetector(

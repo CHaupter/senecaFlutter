@@ -19,7 +19,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final pageView = PageView(
       controller: controller,
-      children: [HomeScreen(), AgendaScreen(), ComunicacionScreen()],
+      children: [
+        HomeScreen(),
+        AgendaScreen(),
+      ],
       onPageChanged: (value) {
         pageIndex = value;
         setNavBarIndex(value);
@@ -45,8 +48,6 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.timelapse), label: "Agenda"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.chat_bubble_outline), label: "Comunicaciones"),
           ],
         ));
   }

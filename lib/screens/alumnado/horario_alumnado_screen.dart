@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seneca_aplicacion/models/horario_response.dart';
-import 'package:seneca_aplicacion/models/alumnos_response.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
 
 class HorarioAlumnadoScreen extends StatelessWidget {
@@ -11,7 +9,6 @@ class HorarioAlumnadoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final alumnadoProvider = Provider.of<AlumnadoProvider>(context);
     final listadoAlumnos = alumnadoProvider.listadoAlumnos;
-    final listadoHorarios = alumnadoProvider.listadoHorarios;
 
     return Scaffold(
       appBar: AppBar(

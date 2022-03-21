@@ -3,15 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/models/horario_response.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
 
-final horario = [
-  "8:00 a 9:00",
-  "9:00 a 10:00",
-  "10:00 a 11:00",
-  "11:00 a 12:00",
-  "12:00 a 13:00",
-  "13:00 a 14:00"
-];
-
 class HorarioDetallesAlumnadoScreen extends StatelessWidget {
   const HorarioDetallesAlumnadoScreen({Key? key}) : super(key: key);
 
@@ -52,15 +43,6 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
     );
   }
 
-  // [
-  // [0,0], [0,1], [0,2], [0,3], [0,4],
-  // [1,0], [1,1], [1,2], [1,3], [1,4],
-  // [2,0], [2,1], [2,2], [2,3], [2,4],
-  // [3,0], [3,1], [3,2], [3,3], [3,4],
-  // [4,0], [4,1], [4,2], [4,3], [4,4],
-  // [5,0], [5,1], [5,2], [5,3], [5,4],
-  // ];
-
   TableRow DiasSemana() {
     return TableRow(children: [
       Container(),
@@ -73,6 +55,14 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
   }
 
   TableRow DiaHorario(BuildContext context, int index, int horaDia) {
+    final horario = [
+      "8:00 a 9:00",
+      "9:00 a 10:00",
+      "10:00 a 11:00",
+      "11:00 a 12:00",
+      "12:00 a 13:00",
+      "13:00 a 14:00"
+    ];
     return TableRow(decoration: BoxDecoration(color: Colors.white), children: [
       Container(color: Colors.blue, child: Text(horario[horaDia])),
       devolverClase(context, index, horaDia, 0),
@@ -101,8 +91,6 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
         listadoHorarioClase.add(listadoHorario[i]);
       }
     }
-
-    print(listadoHorarioClase[0].dia.substring(0, 1));
 
     for (int i = 0; i < listadoHorarioClase.length; i++) {
       for (int j = 0; j < 5; j++) {
