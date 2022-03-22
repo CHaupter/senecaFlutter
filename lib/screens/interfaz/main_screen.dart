@@ -17,6 +17,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final nombreUsuario = ModalRoute.of(context)!.settings.arguments;
+
     final pageView = PageView(
       controller: controller,
       children: [

@@ -42,13 +42,15 @@ class _GoogleSignInState extends State<GoogleSignIn> {
                   User? user = FirebaseAuth.instance.currentUser;
                   String? usuarioGoogle = user!.email;
 
+                  String? nombreUsuarioGoogle = user.displayName;
                   bool existe = false;
 
                   for (int i = 0; i < lista.length; i++) {
                     print(lista[i].usuario);
                     if (lista[i].usuario == usuarioGoogle.toString()) {
                       existe = true;
-                      Navigator.pushNamed(context, "main_screen");
+                      Navigator.pushNamed(context, "main_screen",
+                          arguments: nombreUsuarioGoogle);
                     }
                   }
 

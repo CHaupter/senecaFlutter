@@ -11,6 +11,12 @@ class ContactoProfesoresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final centroProvider = Provider.of<CentroProvider>(context);
     final listadoProfesores = centroProvider.listaProfesores;
+    List<Profesor> listaOrdenadaProfesores = [];
+
+    listaOrdenadaProfesores.addAll(listadoProfesores);
+
+    listaOrdenadaProfesores.sort(((a, b) => a.nombre.compareTo(b.nombre)));
+
     return Scaffold(
       appBar: AppBar(
         title: Text("CONTACTO"),
@@ -18,7 +24,7 @@ class ContactoProfesoresScreen extends StatelessWidget {
       body: Center(
         child: Container(
           child: ListView.builder(
-              itemCount: listadoProfesores.length,
+              itemCount: listaOrdenadaProfesores.length,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) {
                   return GestureDetector(
@@ -29,10 +35,10 @@ class ContactoProfesoresScreen extends StatelessWidget {
                 } else {
                   return GestureDetector(
                     onTap: () {
-                      _mostrarAlert(context, index, listadoProfesores);
+                      _mostrarAlert(context, index, listaOrdenadaProfesores);
                     },
                     child: ListTile(
-                      title: Text(listadoProfesores[index].nombre),
+                      title: Text(listaOrdenadaProfesores[index].nombre),
                     ),
                   );
                 }

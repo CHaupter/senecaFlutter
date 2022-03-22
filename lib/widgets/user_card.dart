@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/main.dart';
+import 'package:seneca_aplicacion/screens/interfaz/main_screen.dart' as main;
+import 'package:seneca_aplicacion/service/services.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({
@@ -39,6 +41,8 @@ class _UsuarioOpciones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+
     return Expanded(
       flex: 7,
       child: Container(
@@ -52,7 +56,7 @@ class _UsuarioOpciones extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(left: 10, top: 15),
                     child: Text(
-                      "Haupter Pérez, Carlos",
+                      user!.displayName.toString(),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),

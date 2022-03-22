@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/models/horario_response.dart';
@@ -8,6 +9,8 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 17);
+
     final index = ModalRoute.of(context)!.settings.arguments as int;
     final alumnadoProvider = Provider.of<AlumnadoProvider>(context);
     final listadoAlumnos = alumnadoProvider.listadoAlumnos;
@@ -26,7 +29,7 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
               Container(
                 color: Colors.blue,
                 child: Table(
-                  border: TableBorder.all(),
+                  border: TableBorder.all(style: BorderStyle.solid),
                   children: [
                     DiasSemana(),
                     DiaHorario(context, index, 0),
@@ -38,6 +41,19 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              Expanded(
+                  child: Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: 25, left: 10),
+                child: Column(
+                  children: [
+                    Text(
+                      "ASIGNATURAS\n\nALG - Álgebra\nBIO - Biologia\nEDU - Educación Física\nINF - Informática\nING - Inglés\nMAT - Matemáticas\nTEC - Tecnología",
+                      style: textStyle,
+                    ),
+                  ],
+                ),
+              ))
             ],
           )),
     );
@@ -68,7 +84,7 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
           color: Colors.blue,
           child: Text(
             horario[horaDia],
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           )),
       devolverClase(context, index, horaDia, 0),
       devolverClase(context, index, horaDia, 1),
@@ -119,11 +135,11 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
     return Container(
       child: Column(children: [
         Text(
-          asignatura.toUpperCase(),
+          asignatura.toUpperCase().substring(0, 3),
           textAlign: TextAlign.center,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 12,
+            fontSize: 15,
           ),
         ),
         Text(
