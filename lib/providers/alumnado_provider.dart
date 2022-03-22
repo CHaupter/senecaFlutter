@@ -6,6 +6,9 @@ class AlumnadoProvider extends ChangeNotifier {
   List<DatosAlumnos> listadoAlumnos = [];
   List<HorarioResult> listadoHorarios = [];
 
+  //Prueba Google Script ejecutado
+  //https://script.google.com/macros/s/AKfycbz6i2aqeJs4ui5qUHoHzRSUhsEOfnpcy_rQ1wmJFAOVYjL4FoX7Qb6u8ePBci8HoWo5qQ/exec?spreadsheetId=14nffuLY-WILXuAQFMUWNEZIYK08WxI0g1_aK73Ths9Q&sheet=Datos_Alumnado
+
   //hoja excel
   //https://docs.google.com/spreadsheets/d/1TUUhwPtc06E_Ka-TU_4XUiGOz-BZOEjdLvbxRAJQiMg/edit#gid=0
 

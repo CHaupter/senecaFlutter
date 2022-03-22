@@ -9,11 +9,12 @@ class HorarioDetallesAlumnadoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 17);
-
     final index = ModalRoute.of(context)!.settings.arguments as int;
     final alumnadoProvider = Provider.of<AlumnadoProvider>(context);
     final listadoAlumnos = alumnadoProvider.listadoAlumnos;
+
+    //Definimos el estilo de texto para la leyenda de alumnos
+    final textStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 17);
 
     return Scaffold(
       appBar: AppBar(

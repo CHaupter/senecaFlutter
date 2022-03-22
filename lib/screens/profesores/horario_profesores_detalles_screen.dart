@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
 
+//Tramos correspondiente a las horas acabas en y 15, incluyendo el recreo
 final tramosHorarios = [
   [2, 22, 42, 62, 82],
   [4, 24, 44, 64, 84],
@@ -114,6 +115,7 @@ Widget devolverClase(
   String asignatura = "";
   String aula = "";
 
+  //Buscamos la asignatura y el aula correspondientes a la hora actual
   for (int i = 0; i < listadoAulas.length; i++) {
     if (int.parse(nuestroHorario[1]) == int.parse(listadoAulas[i].numIntAu)) {
       aula = listadoAulas[i].abreviatura;
@@ -127,6 +129,7 @@ Widget devolverClase(
     }
   }
 
+  //Contenedor con la asignatura y el aula correspondiente
   return Container(
     child: Column(children: [
       Text(asignatura,
