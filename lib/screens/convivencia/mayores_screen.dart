@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class MayoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final mayoresProvider = Provider.of<ProviderMayoresResponse>(context);
+    final mayoresProvider = Provider.of<ConvivenciaProvider>(context);
     final listadoMayores = mayoresProvider.listaMayores;
 
     final datosAlumnosProvider = Provider.of<AlumnadoProvider>(context);

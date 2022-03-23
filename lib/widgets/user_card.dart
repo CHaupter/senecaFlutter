@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/main.dart';
-import 'package:seneca_aplicacion/screens/interfaz/main_screen.dart' as main;
 import 'package:seneca_aplicacion/service/services.dart';
 
 class UserCard extends StatelessWidget {

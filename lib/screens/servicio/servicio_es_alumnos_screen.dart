@@ -51,14 +51,10 @@ class _ServicioESAlumnosScreenState extends State<ServicioESAlumnosScreen> {
                     controllerTextoFechaEntrada.text = "";
                     controllerTextoFechaSalida.text = "";
 
-                    String fechaEntrada = DateFormat("dd-MM-yyyy hh:mm")
-                        .format(DateTime.now())
-                        .toString();
-
                     showGeneralDialog(
                         context: context,
                         barrierDismissible: false,
-                        transitionDuration: Duration(milliseconds: 1000),
+                        transitionDuration: Duration(milliseconds: 300),
                         pageBuilder: (context, animation, secondaryAnimation) {
                           controllerTextoNombreAlumno.text =
                               listaAlumnos[index].nombre;
@@ -100,6 +96,9 @@ class _ServicioESAlumnosScreenState extends State<ServicioESAlumnosScreen> {
             TextButton(
                 onPressed: () {
                   //Logica documento
+                  print(controllerTextoFechaEntrada.text);
+                  print(controllerTextoFechaSalida.text);
+
                   Navigator.pop(context);
                 },
                 child: Text(

@@ -10,7 +10,7 @@ class CentroProvider extends ChangeNotifier {
   List<Aula> listaAulas = [];
 
   CentroProvider() {
-    print("Inicializado Centro Provider");
+    print("Centro Provider inicializado");
 
     this.getDatosCentro();
   }

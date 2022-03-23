@@ -34,11 +34,11 @@ class AppState extends StatelessWidget {
           lazy: false,
         ),
         ChangeNotifierProvider(
-          create: (_) => ProviderExpulsadosResponse(),
+          create: (_) => ConvivenciaProvider(),
           lazy: false,
         ),
         ChangeNotifierProvider(
-          create: (_) => ProviderMayoresResponse(),
+          create: (_) => ServicioProvider(),
           lazy: false,
         ),
         ChangeNotifierProvider(

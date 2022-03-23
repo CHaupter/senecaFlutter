@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ExpulsadosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final expulsadosProvider = Provider.of<ProviderExpulsadosResponse>(context);
+    final expulsadosProvider = Provider.of<ConvivenciaProvider>(context);
     final listadoExpulsados = expulsadosProvider.listaExpulsados;
     final datosAlumnosProvider = Provider.of<AlumnadoProvider>(context);
     final listadoAlumnos = datosAlumnosProvider.listadoAlumnos;

@@ -10,17 +10,16 @@ class AlumnadoProvider extends ChangeNotifier {
   //https://script.google.com/macros/s/AKfycbz6i2aqeJs4ui5qUHoHzRSUhsEOfnpcy_rQ1wmJFAOVYjL4FoX7Qb6u8ePBci8HoWo5qQ/exec?spreadsheetId=14nffuLY-WILXuAQFMUWNEZIYK08WxI0g1_aK73Ths9Q&sheet=Datos_Alumnado
 
   //hoja excel
-  //https://docs.google.com/spreadsheets/d/1TUUhwPtc06E_Ka-TU_4XUiGOz-BZOEjdLvbxRAJQiMg/edit#gid=0
+  //https://docs.google.com/spreadsheets/d/14nffuLY-WILXuAQFMUWNEZIYK08WxI0g1_aK73Ths9Q/edit#gid=0
 
-  //https://opensheet.vercel.app/1TUUhwPtc06E_Ka-TU_4XUiGOz-BZOEjdLvbxRAJQiMg/Cursos
-  final _url = "opensheet.vercel.app";
-  final _api = "1TUUhwPtc06E_Ka-TU_4XUiGOz-BZOEjdLvbxRAJQiMg";
+  final _url = "script.google.com";
+  final _api =
+      "macros/s/AKfycbz6i2aqeJs4ui5qUHoHzRSUhsEOfnpcy_rQ1wmJFAOVYjL4FoX7Qb6u8ePBci8HoWo5qQ/exec";
+  final _idHoja = "14nffuLY-WILXuAQFMUWNEZIYK08WxI0g1_aK73Ths9Q";
   final _hojaCursos = "Cursos";
 
-  //https://opensheet.vercel.app/1TUUhwPtc06E_Ka-TU_4XUiGOz-BZOEjdLvbxRAJQiMg/Datos_Alumnado
   final _hojaAlumnos = "Datos_Alumnado";
 
-  //https://opensheet.vercel.app/1TUUhwPtc06E_Ka-TU_4XUiGOz-BZOEjdLvbxRAJQiMg/horarios
   final _hojaHorario = "Horarios";
 
   AlumnadoProvider() {
@@ -29,8 +28,10 @@ class AlumnadoProvider extends ChangeNotifier {
     getHorario();
   }
 
-  Future<String> _getJsonData(String baseurl, String api, String pagina) async {
-    final url = Uri.https(baseurl, api + "/" + pagina);
+  Future<String> _getJsonData(
+      String baseurl, String api, String pagina, String hoja) async {
+    final url =
+        Uri.https(baseurl, api, {"spreadsheetId": "$pagina", "sheet": "$hoja"});
 
     final response = await http.get(url);
 
@@ -38,7 +39,7 @@ class AlumnadoProvider extends ChangeNotifier {
   }
 
   Future<List<String>> getCursos() async {
-    String jsonData = await this._getJsonData(_url, _api, _hojaCursos);
+    String jsonData = await this._getJsonData(_url, _api, _idHoja, _hojaCursos);
     jsonData = '{"results":' + jsonData + '}';
     final cursosResponse = CursosResponse.fromJson(jsonData);
     List<String> nombres = [];
@@ -50,7 +51,8 @@ class AlumnadoProvider extends ChangeNotifier {
   }
 
   Future<List<dynamic>> getAlumnos(String cursoABuscarAlumnos) async {
-    String jsonData = await this._getJsonData(_url, _api, _hojaAlumnos);
+    String jsonData =
+        await this._getJsonData(_url, _api, _idHoja, _hojaAlumnos);
     jsonData = '{"results":' + jsonData + '}';
     final cursosResponse = AlumnosResponse.fromJson(jsonData);
     List<dynamic> nombresAlumnos = [];
@@ -62,7 +64,8 @@ class AlumnadoProvider extends ChangeNotifier {
   }
 
   getAlumno() async {
-    String jsonData = await this._getJsonData(_url, _api, _hojaAlumnos);
+    String jsonData =
+        await this._getJsonData(_url, _api, _idHoja, _hojaAlumnos);
     jsonData = '{"results":' + jsonData + '}';
     final cursosResponse = AlumnosResponse.fromJson(jsonData);
     listadoAlumnos = cursosResponse.result;
@@ -70,7 +73,8 @@ class AlumnadoProvider extends ChangeNotifier {
   }
 
   getHorario() async {
-    String jsonData = await this._getJsonData(_url, _api, _hojaHorario);
+    String jsonData =
+        await this._getJsonData(_url, _api, _idHoja, _hojaHorario);
     jsonData = '{"results":' + jsonData + '}';
     final cursosResponse = HorarioResponse.fromJson(jsonData);
     listadoHorarios = cursosResponse.result;

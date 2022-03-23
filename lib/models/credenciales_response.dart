@@ -25,19 +25,16 @@ class Credenciales {
   Credenciales({
     required this.id,
     required this.usuario,
-    required this.pass,
   });
 
   String id;
   String usuario;
-  String pass;
 
-  factory Credenciales.fromJson(dynamic str) =>
+  factory Credenciales.fromJson(String str) =>
       Credenciales.fromMap(json.decode(str));
 
   factory Credenciales.fromMap(Map<String, dynamic> json) => Credenciales(
         id: json["ID"],
         usuario: json["Usuario"],
-        pass: json["Pass"],
       );
 }
