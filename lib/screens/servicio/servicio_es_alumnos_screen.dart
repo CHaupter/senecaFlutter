@@ -14,9 +14,11 @@ class ServicioESAlumnosScreen extends StatefulWidget {
 
 class _ServicioESAlumnosScreenState extends State<ServicioESAlumnosScreen> {
   bool botonPulsado = true;
+  bool fechaCompleta = false;
   String fechaFormatoEntrada = "";
   String fechaFormatoSalida = "";
   String nombreAlumno = "";
+  final servicioProvider = ServicioProvider();
 
   final controllerTextoNombreAlumno = TextEditingController();
   final controllerTextoFechaEntrada = TextEditingController();
@@ -63,6 +65,8 @@ class _ServicioESAlumnosScreenState extends State<ServicioESAlumnosScreen> {
                               DateFormat("dd-MM-yyyy hh:mm")
                                   .format(DateTime.now());
                           return DialogoBotones(
+                              fechaCompleta,
+                              servicioProvider,
                               controllerTextoNombreAlumno,
                               controllerTextoFechaEntrada,
                               controllerTextoFechaSalida);
@@ -80,6 +84,8 @@ class _ServicioESAlumnosScreenState extends State<ServicioESAlumnosScreen> {
   }
 
   Widget DialogoBotones(
+      bool fechaCompleta,
+      ServicioProvider servicio,
       TextEditingController controllerTextoNombreAlumno,
       TextEditingController controllerTextoFechaEntrada,
       TextEditingController controllerTextoFechaSalida) {
@@ -95,11 +101,16 @@ class _ServicioESAlumnosScreenState extends State<ServicioESAlumnosScreen> {
           actions: [
             TextButton(
                 onPressed: () {
-                  //Logica documento
-                  print(controllerTextoFechaEntrada.text);
-                  print(controllerTextoFechaSalida.text);
-
-                  Navigator.pop(context);
+                  if (!fechaCompleta) {
+                    null;
+                  } else {
+                    servicio.setAlumnosServicio(
+                        controllerTextoNombreAlumno.text,
+                        controllerTextoFechaEntrada.text,
+                        controllerTextoFechaSalida.text);
+                    Navigator.pop(context);
+                  }
+                  ;
                 },
                 child: Text(
                   "CONFIRMAR",
@@ -138,6 +149,8 @@ class _ServicioESAlumnosScreenState extends State<ServicioESAlumnosScreen> {
                         suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
+                                fechaCompleta = true;
+                                print("fechaCompleta: $fechaCompleta");
                                 controllerTextoFechaSalida.text =
                                     DateFormat("dd-MM-yyyy hh:mm")
                                         .format(DateTime.now());
