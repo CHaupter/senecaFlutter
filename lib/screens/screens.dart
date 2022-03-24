@@ -34,3 +34,4 @@ export 'package:seneca_aplicacion/screens/servicio/servicio_es_alumnos_screen.da
 export 'package:seneca_aplicacion/screens/servicio/servicio_es_screen.dart';
 export 'package:seneca_aplicacion/screens/servicio/servicio_informes_screen.dart';
 export 'package:seneca_aplicacion/screens/servicio/servicio_screen.dart';
+export 'package:seneca_aplicacion/screens/servicio/servicio_informes_detalles_screen.dart';

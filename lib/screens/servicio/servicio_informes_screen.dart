@@ -18,19 +18,18 @@ class _ServicioInformesScreenState extends State<ServicioInformesScreen> {
   String selectedDateFin = "";
   bool fechaInicioEscogida = false;
   List<Servicio> listaAlumnosFechas = [];
+  List<String> listaAlumnosNombres = [];
   DateTime dateTimeInicio = DateTime.now();
   DateTime dateTimeFin = DateTime.now();
+  int size = 0;
+  int repeticiones = 0;
 
   @override
   Widget build(BuildContext context) {
     final servicioProvider = Provider.of<ServicioProvider>(context);
-    servicioProvider.getAlumnosServicio();
-
     final listadoAlumnosServicio = servicioProvider.listadoAlumnosServicio;
-    listaAlumnosFechas.clear();
-    listaAlumnosFechas.addAll(listadoAlumnosServicio);
 
-    double altura = MediaQuery.of(context).size.height;
+    //double altura = MediaQuery.of(context).size.height;
     double anchura = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -42,57 +41,94 @@ class _ServicioInformesScreenState extends State<ServicioInformesScreen> {
         children: [
           Container(
             padding: EdgeInsets.only(top: 15),
-            child: Row(
+            child: Column(
               children: [
-                Container(
-                  width: anchura * 0.5,
-                  child: TextField(
-                    readOnly: true,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    controller: TextEditingController(text: selectedDateInicio),
-                    decoration: InputDecoration(
-                      labelText: "FECHA INICIO",
-                      border: OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.calendar_today_rounded),
-                        onPressed: () {
-                          fechaInicioEscogida = true;
-                          mostrarFecha(
-                              "Inicio", servicioProvider, listaAlumnosFechas);
-                        },
+                Row(
+                  children: [
+                    Container(
+                      width: anchura * 0.5,
+                      child: TextField(
+                        readOnly: true,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        controller:
+                            TextEditingController(text: selectedDateInicio),
+                        decoration: InputDecoration(
+                          labelText: "FECHA INICIO",
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.calendar_today_rounded),
+                            onPressed: () {
+                              fechaInicioEscogida = true;
+                              mostrarFecha(
+                                  "Inicio", listaAlumnosFechas, context);
+                            },
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Container(
+                      width: anchura * 0.5,
+                      child: TextField(
+                        enabled: fechaInicioEscogida,
+                        readOnly: true,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        controller:
+                            TextEditingController(text: selectedDateFin),
+                        decoration: InputDecoration(
+                          labelText: "FECHA FIN",
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.calendar_today_rounded),
+                            onPressed: () => mostrarFecha(
+                                "Fin", listaAlumnosFechas, context),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                Container(
-                  width: anchura * 0.5,
-                  child: TextField(
-                    enabled: fechaInicioEscogida,
-                    readOnly: true,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    controller: TextEditingController(text: selectedDateFin),
-                    decoration: InputDecoration(
-                      labelText: "FECHA FIN",
-                      border: OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.calendar_today_rounded),
-                        onPressed: () => mostrarFecha(
-                            "Fin", servicioProvider, listaAlumnosFechas),
-                      ),
-                    ),
-                  ),
-                )
+                ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        listaAlumnosFechas = [];
+                        listaAlumnosNombres = [];
+                        updateLista(context, dateTimeInicio, dateTimeFin);
+
+                        // for (int i = 0; i < listaAlumnosFechas.length; i++) {
+                        //   print(listaAlumnosFechas[i].nombreAlumno);
+                        // }
+
+                        for (int i = 0; i < listaAlumnosFechas.length; i++) {
+                          listaAlumnosNombres
+                              .add(listaAlumnosFechas[i].nombreAlumno);
+                        }
+
+                        listaAlumnosNombres =
+                            listaAlumnosNombres.toSet().toList();
+
+                        listaAlumnosNombres.sort(((a, b) => a.compareTo(b)));
+                        size = listaAlumnosNombres.length;
+                      });
+                    },
+                    child: Text("MOSTRAR"))
               ],
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: listaAlumnosFechas.length,
+              itemCount: size,
               itemBuilder: (context, index) {
+                repeticiones =
+                    _calcularRepeticiones(listaAlumnosNombres[index]);
+
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(
+                      context, "servicio_informes_detalles_screen",
+                      arguments: listaAlumnosNombres[index]),
                   child: ListTile(
-                      title: Text("${listaAlumnosFechas[index].nombreAlumno}")),
+                    title: Text("${listaAlumnosNombres[index]}"),
+                    subtitle: Text("Cantidad $repeticiones"),
+                  ),
                 );
               },
             ),
@@ -102,8 +138,8 @@ class _ServicioInformesScreenState extends State<ServicioInformesScreen> {
     );
   }
 
-  void mostrarFecha(String modo, ServicioProvider servicioProvider,
-      List<Servicio> listaAlumnosFechas) {
+  void mostrarFecha(
+      String modo, List<Servicio> listaAlumnosFechas, BuildContext context) {
     showCupertinoModalPopup(
         context: context,
         builder: (BuildContext builder) {
@@ -131,18 +167,19 @@ class _ServicioInformesScreenState extends State<ServicioInformesScreen> {
                       dateTimeFin = value;
                     });
 
-                    updateLista(servicioProvider, dateTimeInicio, dateTimeFin);
+                    // updateLista(servicioProvider, dateTimeInicio, dateTimeFin);
                   }
                 }),
           );
         });
   }
 
-  void updateLista(ServicioProvider servicioProvider, DateTime dateTimeInicio,
-      DateTime dateTimeFin) {
-    servicioProvider.getAlumnosServicio();
-    final listadoAlumnadoServicio = servicioProvider.listadoAlumnosServicio;
-    listaAlumnosFechas.clear();
+  void updateLista(
+      BuildContext context, DateTime dateTimeInicio, DateTime dateTimeFin) {
+    final servicioProviderLista =
+        Provider.of<ServicioProvider>(context, listen: false);
+    final listadoAlumnadoServicio =
+        servicioProviderLista.listadoAlumnosServicio;
 
     for (int i = 0; i < listadoAlumnadoServicio.length; i++) {
       bool dentro = compararFechas(
@@ -177,11 +214,22 @@ class _ServicioInformesScreenState extends State<ServicioInformesScreen> {
     String fechaSalida = "$anoAlumnoSalida$mesAlumnoSalida$diaAlumnoSalida";
     DateTime fechaSalidaParseada = DateTime.parse(fechaSalida);
 
-    if (fechaEntradaParseada.isAfter(dateInicio) &&
-        fechaSalidaParseada.isBefore(dateFin)) {
+    if (fechaEntradaParseada.isAfter(dateInicio.subtract(Duration(days: 1))) &&
+        fechaSalidaParseada.isBefore(dateFin.add(Duration(days: 1)))) {
       estaDentro = true;
     }
 
     return estaDentro;
+  }
+
+  int _calcularRepeticiones(String nombreAlumno) {
+    int num = 0;
+
+    for (int i = 0; i < listaAlumnosFechas.length; i++) {
+      if (nombreAlumno == listaAlumnosFechas[i].nombreAlumno) {
+        num++;
+      }
+    }
+    return num;
   }
 }

@@ -21,7 +21,7 @@ class ServicioProvider extends ChangeNotifier {
   final _apiEscritura =
       "macros/s/AKfycbz7ZwCTn2XXpXuPO2-m9tyR1sIC9lOMgvPPOsbDehda2NRoko871PvZvzF1jQnaq8Du/exec";
   final _idHoja = "1Jq4ihUzE5r4fqK9HHZQv1dg4AAgzdjPbGkpJRByu-Ds";
-  final _hojaCursos = "Servicio";
+  final _hojaServicio = "Servicio";
 
   ServicioProvider() {
     print("Servicio Provider inicializado");
@@ -42,7 +42,7 @@ class ServicioProvider extends ChangeNotifier {
 
   getAlumnosServicio() async {
     String jsonData =
-        await this._getJsonData(_url, _apiLectura, _idHoja, _hojaCursos);
+        await this._getJsonData(_url, _apiLectura, _idHoja, _hojaServicio);
     jsonData = '{"results":' + jsonData + '}';
     final servicioResponse = ServicioResponse.fromJson(jsonData);
 
@@ -65,7 +65,7 @@ class ServicioProvider extends ChangeNotifier {
 
   setAlumnosServicio(
       String nombreAlumno, String fechaEntrada, String fechaSalida) {
-    this._setAlumnos(_url, _apiEscritura, _idHoja, _hojaCursos, nombreAlumno,
+    this._setAlumnos(_url, _apiEscritura, _idHoja, _hojaServicio, nombreAlumno,
         fechaEntrada, fechaSalida);
 
     notifyListeners();

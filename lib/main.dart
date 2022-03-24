@@ -102,6 +102,8 @@ class MyApp extends StatelessWidget {
             ServicioESAlumnosScreen(),
         "servicio_informes_screen": (BuildContext context) =>
             ServicioInformesScreen(),
+        "servicio_informes_detalles_screen": (BuildContext context) =>
+            ServicioInformesDetallesScreen(),
       },
     );
   }
