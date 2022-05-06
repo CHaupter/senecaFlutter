@@ -7,13 +7,15 @@ class TitlePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: size.height * 0.03),
       width: double.infinity,
       child: Column(
         children: [
           Center(
-            child: Text("iSéneca",
+            child: Text("iJándula",
                 style: TextStyle(
                     fontSize: 60, color: Colors.white, fontFamily: 'ErasDemi')),
           ),

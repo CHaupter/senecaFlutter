@@ -52,12 +52,14 @@ class ContactoProfesoresScreen extends StatelessWidget {
 void _mostrarAlert(
     BuildContext context, int index, List<Profesor> listadoProfesores) {
   final int numeroTlf = (new Random().nextInt(99999999) + 600000000);
-  final String mailProfesor = "Correoejemplo@gmail.com";
+  final String mailProfesor = "Correo@gmail.com";
 
   showDialog(
       context: context,
       barrierDismissible: true,
       builder: (context) {
+        TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold);
+
         return AlertDialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -65,20 +67,39 @@ void _mostrarAlert(
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text("Correo: $mailProfesor \nTeléfono: $numeroTlf"),
-              Text(" "),
+              Divider(
+                color: Colors.black,
+                thickness: 1,
+              ),
               Row(
                 children: [
+                  Text(
+                    "Correo: ",
+                    style: textStyle,
+                  ),
+                  Text("$mailProfesor"),
                   IconButton(
-                      onPressed: () {
-                        launch("mailto: $mailProfesor");
-                      },
-                      icon: Icon(Icons.mail)),
+                    onPressed: () {
+                      launch("mailto: $mailProfesor");
+                    },
+                    icon: Icon(Icons.mail),
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    "Teléfono: ",
+                    style: textStyle,
+                  ),
+                  Text("$numeroTlf"),
                   IconButton(
                       onPressed: () {
                         launch("tel:$numeroTlf");
                       },
-                      icon: Icon(Icons.phone))
+                      icon: Icon(Icons.phone),
+                      color: Colors.blue)
                 ],
               )
             ],

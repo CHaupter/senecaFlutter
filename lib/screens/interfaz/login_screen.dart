@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/service/services.dart';
 
+Size size = Size.zero;
+
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,81 +47,105 @@ class Content extends StatefulWidget {
 class _ContentState extends State<Content> {
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      Center(
-        child: Column(
-          children: [
-            SizedBox(height: 50),
+    return SafeArea(
+      child: Column(
+        children: [
+          //Titulo
+          Expanded(child: TextoAplicacion()),
 
-            //Titulo
-            Text(
-              "iJándula",
-              style: TextStyle(
-                fontFamily: 'ErasDemi',
-                color: Colors.white,
-                fontSize: 75,
-                //fontWeight: FontWeight.bold,
-              ),
-            ),
+          //Botón Google
+          Center(child: GoogleSignIn()),
+          Expanded(child: Container()),
 
-            SizedBox(height: 110),
+          //Logo
+          LogoVersion(),
+        ],
+      ),
+    );
+  }
+}
 
-            //Botón Google
-            GoogleSignIn(),
+class TextoAplicacion extends StatelessWidget {
+  const TextoAplicacion({
+    Key? key,
+  }) : super(key: key);
 
-            SizedBox(height: 70),
+  @override
+  Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
 
-            //No recuerdo contraseña
-            /*Text(
-              "No recuerdo mi contraseña",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold
-              ),
-            ),*/
-            SizedBox(height: 100),
+    return Container(
+      margin: EdgeInsets.only(top: size.height * 0.05),
+      child: Text(
+        "iJándula",
+        style: TextStyle(
+          fontFamily: 'ErasDemi',
+          color: Colors.white,
+          fontSize: 75,
+          //fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
 
-            //Logo
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 30, right: 5),
-                  child: Image.asset(
-                    "assets/iconoJunta.png",
-                    height: 65,
-                    width: 65,
-                    color: Colors.white,
-                  ),
+class LogoVersion extends StatelessWidget {
+  const LogoVersion({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+
+    return Container(
+      margin: EdgeInsets.only(bottom: size.height * 0.02),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                    left: size.width * 0.1, right: size.width * 0.01),
+                child: Image.asset(
+                  "assets/iconoJunta.png",
+                  height: 65,
+                  width: 65,
+                  color: Colors.white,
                 ),
+              ),
 
-                //Texto Junta Andalucía
-                Column(
+              //Texto Junta Andalucía
+              Container(
+                margin: EdgeInsets.only(top: size.height * 0.035),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("IES Jándula",
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 7),
                     Text("Desarrollo Aplicaciones Multiplataforma",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: Colors.white)),
                   ],
                 ),
-              ],
-            ),
-
-            //Versión
-            Container(
-              margin: EdgeInsets.only(top: 10, right: 10),
+              ),
+            ],
+          ),
+          //Versión
+          Opacity(
+            opacity: 0.15,
+            child: Container(
+              margin: EdgeInsets.only(
+                  top: size.height * 0.01, right: size.width * 0.03),
               alignment: Alignment.bottomRight,
               child: Text("v1.1.0",
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold)),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
-    ]);
+    );
   }
 }

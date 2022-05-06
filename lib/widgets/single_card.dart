@@ -13,7 +13,10 @@ class SingleCard extends StatelessWidget {
 
     return Container(
         height: size.height * 0.15,
-        margin: EdgeInsets.only(top: 20, right: 12),
+        margin: EdgeInsets.only(
+            top: size.height * 0.1,
+            right: size.width * 0.05,
+            left: size.width * 0.05),
         child: Column(
           children: [
             Container(

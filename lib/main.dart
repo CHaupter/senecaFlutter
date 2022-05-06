@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:seneca_aplicacion/providers/providers.dart';
 import 'package:seneca_aplicacion/screens/screens.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   LogOut();
 
   runApp(AppState());

@@ -18,6 +18,7 @@ class ExpulsadosScreen extends StatelessWidget {
     // DateTime now = DateTime.now();
 
     for (int i = 0; i < listadoExpulsados.length; i++) {
+      //Líneas comentadas para desvincular fecha de contenido
       // print('Dentro del for');
       // final listaExpulsion = listadoExpulsados[i].fec_inic.split("-");
       // print(listaExpulsion);
@@ -25,8 +26,12 @@ class ExpulsadosScreen extends StatelessWidget {
       // if (int.parse(listaExpulsion[0]) == now.year &&
       //     int.parse(listaExpulsion[1]) == now.month &&
       //     int.parse(listaExpulsion[2]) == now.day) {
+
+      //Sólo dejamos estas dos líneas para ver todo el contenido
       listadoExpulsadosHoy.add(listadoExpulsados[i]);
       listadoExpulsadosHoy.sort((a, b) => b.fec_fin.compareTo(a.fec_fin));
+
+      //Líneas comentadas para desvincular fecha de contenido
       // print('Entra en el if');
       // print(listadoExpulsadosHoy);
       // }
@@ -36,8 +41,6 @@ class ExpulsadosScreen extends StatelessWidget {
       for (int j = 0; j < listadoAlumnos.length; j++) {
         if (listadoExpulsadosHoy[i].apellidosNombre ==
             listadoAlumnos[j].nombre) {
-          // print(listadoExpulsadosHoy[i].apellidosNombre);
-          // print(listadoAlumnos[j].nombre);
           listadoAlumnos[j].email;
           listadoAlumnos[j].telefonoAlumno;
           listadoAlumnos[j].telefonoMadre;
@@ -95,6 +98,8 @@ class ExpulsadosScreen extends StatelessWidget {
         context: context,
         barrierDismissible: true,
         builder: (context) {
+          TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold);
+
           return AlertDialog(
             insetPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             shape: RoundedRectangleBorder(
@@ -103,50 +108,71 @@ class ExpulsadosScreen extends StatelessWidget {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                Divider(
+                  color: Colors.black,
+                  thickness: 1,
+                ),
                 Row(
                   children: [
-                    Text("Correo:${cogerDatosExpulsados[index].email}"),
+                    Text(
+                      "Correo: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosExpulsados[index].email}"),
                     IconButton(
                         onPressed: () {
                           launch("mailto:${cogerDatosExpulsados[index].email}");
                         },
-                        icon: Icon(Icons.mail)),
+                        icon: Icon(Icons.mail),
+                        color: Colors.blue),
                   ],
                 ),
                 Row(
                   children: [
                     Text(
-                        "Teléfono Alumno: ${cogerDatosExpulsados[index].telefonoAlumno}"),
+                      "Teléfono Alumno: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosExpulsados[index].telefonoAlumno}"),
                     IconButton(
                         onPressed: () {
                           launch(
                               "tel:${cogerDatosExpulsados[index].telefonoAlumno}");
                         },
-                        icon: Icon(Icons.phone)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
                   ],
                 ),
                 Row(
                   children: [
                     Text(
-                        "Teléfono Madre: ${cogerDatosExpulsados[index].telefonoMadre}"),
+                      "Teléfono Madre: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosExpulsados[index].telefonoMadre}"),
                     IconButton(
                         onPressed: () {
                           launch(
                               "tel:${cogerDatosExpulsados[index].telefonoMadre}");
                         },
-                        icon: Icon(Icons.phone)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
                   ],
                 ),
                 Row(
                   children: [
                     Text(
-                        "Teléfono Padre: ${cogerDatosExpulsados[index].telefonoPadre}"),
+                      "Teléfono Padre: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosExpulsados[index].telefonoPadre}"),
                     IconButton(
                         onPressed: () {
                           launch(
                               "tel:${cogerDatosExpulsados[index].telefonoPadre}");
                         },
-                        icon: Icon(Icons.phone)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
                   ],
                 ),
               ],

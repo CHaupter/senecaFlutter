@@ -96,6 +96,8 @@ class MayoresScreen extends StatelessWidget {
         context: context,
         barrierDismissible: true,
         builder: (context) {
+          TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold);
+
           return AlertDialog(
             insetPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             shape: RoundedRectangleBorder(
@@ -104,50 +106,71 @@ class MayoresScreen extends StatelessWidget {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+                Divider(
+                  color: Colors.black,
+                  thickness: 1,
+                ),
                 Row(
                   children: [
-                    Text("Correo: ${cogerDatosMayores[index].email}"),
+                    Text(
+                      "Correo: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosMayores[index].email}"),
                     IconButton(
                         onPressed: () {
                           launch("mailto:${cogerDatosMayores[index].email}");
                         },
-                        icon: Icon(Icons.mail)),
+                        icon: Icon(Icons.mail),
+                        color: Colors.blue),
                   ],
                 ),
                 Row(
                   children: [
                     Text(
-                        "Teléfono Alumno: ${cogerDatosMayores[index].telefonoAlumno}"),
+                      "Teléfono Alumno: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosMayores[index].telefonoAlumno}"),
                     IconButton(
                         onPressed: () {
                           launch(
                               "tel:${cogerDatosMayores[index].telefonoAlumno}");
                         },
-                        icon: Icon(Icons.phone)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
                   ],
                 ),
                 Row(
                   children: [
                     Text(
-                        "Teléfono Madre: ${cogerDatosMayores[index].telefonoMadre}"),
+                      "Teléfono Madre: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosMayores[index].telefonoMadre}"),
                     IconButton(
                         onPressed: () {
                           launch(
                               "tel:${cogerDatosMayores[index].telefonoMadre}");
                         },
-                        icon: Icon(Icons.phone)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
                   ],
                 ),
                 Row(
                   children: [
                     Text(
-                        "Teléfono Padre: ${cogerDatosMayores[index].telefonoPadre}"),
+                      "Teléfono Padre: ",
+                      style: textStyle,
+                    ),
+                    Text("${cogerDatosMayores[index].telefonoPadre}"),
                     IconButton(
                         onPressed: () {
                           launch(
                               "tel:${cogerDatosMayores[index].telefonoPadre}");
                         },
-                        icon: Icon(Icons.phone)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
                   ],
                 ),
               ],

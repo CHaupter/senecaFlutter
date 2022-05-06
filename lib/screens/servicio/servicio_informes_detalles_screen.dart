@@ -69,6 +69,8 @@ class ServicioInformesDetallesScreen extends StatelessWidget {
         context: context,
         barrierDismissible: true,
         builder: (context) {
+          TextStyle textStyle = TextStyle(fontWeight: FontWeight.bold);
+
           return AlertDialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
@@ -76,31 +78,65 @@ class ServicioInformesDetallesScreen extends StatelessWidget {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Text(
-                    "Correo: $mailAlumno \n\nTeléfono: $numeroTlfAlumno \nTeléfono Padre: $numeroTlfPadre \nTeléfono Madre: $numeroTlfMadre"),
-                Text(" "),
+                Divider(
+                  color: Colors.black,
+                  thickness: 1,
+                ),
                 Row(
                   children: [
+                    Text("Correo: ", style: textStyle),
+                    Text("$mailAlumno"),
                     IconButton(
                         onPressed: () {
                           launch("mailto: $mailAlumno");
                         },
-                        icon: Icon(Icons.mail)),
+                        icon: Icon(Icons.mail),
+                        color: Colors.blue),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Teléfono Alumno: ",
+                      style: textStyle,
+                    ),
+                    Text("$numeroTlfAlumno"),
                     IconButton(
                         onPressed: () {
                           launch("tel:$numeroTlfAlumno");
                         },
-                        icon: Icon(Icons.phone)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Teléfono Padre: ",
+                      style: textStyle,
+                    ),
+                    Text("$numeroTlfPadre"),
                     IconButton(
                         onPressed: () {
                           launch("tel:$numeroTlfPadre");
                         },
-                        icon: Icon(Icons.male_rounded)),
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Teléfono Madre: ",
+                      style: textStyle,
+                    ),
+                    Text("$numeroTlfMadre"),
                     IconButton(
                         onPressed: () {
                           launch("tel:$numeroTlfMadre");
                         },
-                        icon: Icon(Icons.female_rounded))
+                        icon: Icon(Icons.phone),
+                        color: Colors.blue)
                   ],
                 )
               ],

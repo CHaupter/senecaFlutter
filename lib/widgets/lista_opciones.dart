@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListaOpciones extends StatefulWidget {
   @override
@@ -21,7 +22,9 @@ class _ListaOpcionesState extends State<ListaOpciones> {
               ),
               Container(
                 child: IconButton(
-                    onPressed: null,
+                    onPressed: () {
+                      launch("https://www.iesjandula.es");
+                    },
                     icon: Icon(
                       Icons.notifications,
                       color: Colors.white,

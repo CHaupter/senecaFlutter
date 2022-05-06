@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:seneca_aplicacion/main.dart';
 import 'package:seneca_aplicacion/service/services.dart';
 
+Size size = Size.zero;
+
 class UserCard extends StatelessWidget {
   const UserCard({
     Key? key,
@@ -9,6 +11,8 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -21,8 +25,8 @@ class UserCard extends StatelessWidget {
               offset: Offset(0, 1))
         ],
       ),
-      width: 400,
-      height: 185,
+      width: size.width * 0.95,
+      height: size.height * 0.2,
       child: Column(
         children: [
           _UsuarioOpciones(),
@@ -41,6 +45,7 @@ class _UsuarioOpciones extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
+    size = MediaQuery.of(context).size;
 
     return Expanded(
       flex: 7,
@@ -50,51 +55,36 @@ class _UsuarioOpciones extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 10, top: 15),
-                    child: Text(
+              child: Container(
+                margin: EdgeInsets.only(left: 10, top: size.height * 0.005),
+                child: Row(
+                  children: [
+                    Text(
                       user!.displayName.toString(),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                  ),
-                  Expanded(child: Container()),
-                  Container(
-                    margin: EdgeInsets.only(right: 10, top: 15),
-                    child: Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/");
-                              LogOut();
-                            },
-                            icon: Icon(Icons.logout)),
-                      ],
-                    ),
-                  )
-                ],
+                    Expanded(child: Container()),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/");
+                          LogOut();
+                        },
+                        icon: Icon(Icons.logout))
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              height: 5,
             ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  margin: EdgeInsets.only(left: 10, top: 20),
+                  margin: EdgeInsets.only(left: size.width * 0.015),
                   child: Column(children: [
-                    Text("I.E.S. Jándula",
+                    Text(" I.E.S. Jándula",
                         style: TextStyle(
                             color: Colors.blue[300],
                             fontSize: 16,
                             fontWeight: FontWeight.bold)),
-                    Text("Perfil alumno",
-                        style: TextStyle(
-                            color: Colors.blue[300],
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold))
                   ]),
                 )),
           ],
@@ -111,14 +101,15 @@ class _LineaBotones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
+
     return Expanded(
       flex: 3,
       child: Container(
-        height: 65,
         width: double.infinity,
         color: Colors.blue,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 25),
+          margin: EdgeInsets.symmetric(horizontal: size.width * 0.1),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -144,7 +135,9 @@ class _LineaBotones extends StatelessWidget {
                   children: [
                     Icon(Icons.book, color: Colors.white),
                     Text("Bandeja de firmas",
-                        style: TextStyle(color: Colors.white))
+                        style: TextStyle(
+                          color: Colors.white,
+                        ))
                   ],
                 ),
               ),
